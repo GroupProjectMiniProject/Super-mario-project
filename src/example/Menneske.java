@@ -4,6 +4,7 @@ public class Menneske {
 	
 	//FAIL!
 	//osotot
-	//lol 77
+	//lol 77//dawdawdu awúd awud
+	
 
 }
