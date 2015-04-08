@@ -17,10 +17,13 @@ public class SetupClass extends BasicGame {
 	private Image mario = null;
 	private Image background = null;
 	private Image platform_basic = null;
+	private Image evilEnemy = null;
+
 	
-	private boolean start = true, jump = false, allowed = true;
+	private boolean start = true, jump = false, allowed = true, enemyStart = true;
 	
 	private Character Mario = new Character();
+	private Enemies Bomb = new Enemies();
 	
 	
 	public SetupClass(String title) {
@@ -31,6 +34,7 @@ public class SetupClass extends BasicGame {
 		mario = new Image ("data/Mario_Basic.png");
 		background = new Image ("data/Background_Basic.bmp");
 		platform_basic = new Image ("data/Platform_Basic.bmp");
+		evilEnemy = new Image ("data/enemy.png");
 		
 	}
 
@@ -42,8 +46,20 @@ public class SetupClass extends BasicGame {
 			Mario.speedX = 0.0f;
 			Mario.speedY = 0.0f;
 			Mario.speedMax = 5;
+			Bomb.x = X-100;
+			Bomb.y = Y-75;
+			Bomb.health = 1;
+			Bomb.speedX = 0.0f;
+			Bomb.speedY = 0.0f;
+			Bomb.speedMax = 5;
 			start = false;
+			
+			
 		}
+		
+	
+		
+		
 		
 		Input input = container.getInput();
 		if (input.isKeyDown(Input.KEY_LEFT)){
@@ -78,13 +94,23 @@ public class SetupClass extends BasicGame {
 			}
 		}
 		
-		if (input.isKeyDown(Input.KEY_DOWN)){
-			//crouch
-		}
+		if (enemyStart){
+				Bomb.speedX = 1.0f;
+				enemyStart = false;
+			
+				}
+	
+		if (Bomb.x == X-100)
+			Bomb.speedX = -1.0f;
+		
+		if (Bomb.x == X-200)
+			Bomb.speedX = 1.0f;
+	
 		
 		//Borders and final position
 		Mario.x += (int)Mario.speedX; 
 		Mario.y += (int)Mario.speedY;
+		Bomb.x += (int)Bomb.speedX;
 		
 		if (Mario.x < 0) Mario.x = 0;
 		if (Mario.x > X-32) Mario.x = X-32;
@@ -99,6 +125,7 @@ public class SetupClass extends BasicGame {
 			platform_basic.draw(i, Y-32);
 		}
 		Mario.draw(mario);
+		Bomb.draw(evilEnemy);
 	}
 	
 	public static void main(String[] args) throws SlickException {
