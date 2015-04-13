@@ -1,44 +1,37 @@
-package TheGame;
+package StateBasedMode;
 
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
-public class SetupClass extends BasicGame {
+public class GameState extends BasicGameState {
 	
-	static int X = 800, Y = 600, jumpSpeed = 12; 
-	
-	static float gravity = 2.0f, acc = 1.2f;
-	
-	private Image mario = null;
-	private Image background = null;
-	private Image platform_basic = null;
-	private Image evilEnemy = null;
-
-	
-	private boolean start = true, jump = false, allowed = true, enemyStart = true;
-	
-	private Character Mario = new Character();
-	private Enemies Bomb = new Enemies();
-	
-	
-	public SetupClass(String title) {
-		super(title);	
-	}
-
-	public void init(GameContainer container) throws SlickException {
+	public static int X = 800, Y = 600, jumpSpeed = 12; 
+	public static float gravity = 2.0f, acc = 1.2f;
+	public Image mario = null;
+	public Image background = null;
+	public Image platform_basic = null;
+	public boolean start = true, jump = false, allowed = true;
+	public Character Mario = new Character();
+		
+	public void init(GameContainer container, StateBasedGame sbg)
+			throws SlickException {
 		mario = new Image ("data/Mario_Basic.png");
 		background = new Image ("data/Background_Basic.bmp");
 		platform_basic = new Image ("data/Platform_Basic.bmp");
-		evilEnemy = new Image ("data/enemy.png");
 		
 	}
+	
+	public void update(GameContainer container, StateBasedGame sbg, int delta)
+			throws SlickException {
+		if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) sbg.enterState(2, new FadeOutTransition(), new FadeInTransition());
 
-	public void update(GameContainer container, int delta) throws SlickException {
 		if (start){
 			Mario.x = X/2-mario.getWidth()/2;
 			Mario.y = Y-64;
@@ -46,20 +39,8 @@ public class SetupClass extends BasicGame {
 			Mario.speedX = 0.0f;
 			Mario.speedY = 0.0f;
 			Mario.speedMax = 5;
-			Bomb.x = X-100;
-			Bomb.y = Y-75;
-			Bomb.health = 1;
-			Bomb.speedX = 0.0f;
-			Bomb.speedY = 0.0f;
-			Bomb.speedMax = 5;
 			start = false;
-			
-			
 		}
-		
-	
-		
-		
 		
 		Input input = container.getInput();
 		if (input.isKeyDown(Input.KEY_LEFT)){
@@ -94,49 +75,34 @@ public class SetupClass extends BasicGame {
 			}
 		}
 		
-		if (enemyStart){
-				Bomb.speedX = 1.0f;
-				enemyStart = false;
-			
-				}
-	
-		if (Bomb.x == X-100)
-			Bomb.speedX = -1.0f;
-		
-		if (Bomb.x == X-200)
-			Bomb.speedX = 1.0f;
-	
+		if (input.isKeyDown(Input.KEY_DOWN)){
+			//crouch
+		}
 		
 		//Borders and final position
 		Mario.x += (int)Mario.speedX; 
 		Mario.y += (int)Mario.speedY;
-		Bomb.x += (int)Bomb.speedX;
 		
 		if (Mario.x < 0) Mario.x = 0;
 		if (Mario.x > X-32) Mario.x = X-32;
-		if (Mario.y > Y-64) Mario.y = Y-64;
+		if (Mario.y > Y-64) Mario.y = Y-64;	
 		
 	}
 
-	public void render(GameContainer container, Graphics g) throws SlickException {
-		//g.drawString("Hello World!", X/2, Y/2);
+	public void render(GameContainer container, StateBasedGame sbg, Graphics g)
+			throws SlickException {
+		g.drawString("Stage 1", 50, 30);
 		background.draw(0, 0);
 		for (int i=0; i<X; i+=32){
 			platform_basic.draw(i, Y-32);
 		}
 		Mario.draw(mario);
-		Bomb.draw(evilEnemy);
+		
 	}
 	
-	public static void main(String[] args) throws SlickException {
-		AppGameContainer app = new AppGameContainer(new SetupClass("Super Mario"));
+	public int getID() {
 		
-		app.setDisplayMode(X, Y, false);
-		app.setAlwaysRender(true);
-		app.setVSync(true);
-		
-		app.start();
+		return 1;
 	}
 	
 }
-

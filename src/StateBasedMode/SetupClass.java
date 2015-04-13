@@ -1,4 +1,4 @@
-package TestOndrej;
+package StateBasedMode;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
@@ -19,7 +19,6 @@ public class SetupClass extends StateBasedGame {
 		app.setDisplayMode(X, Y, false);
 		app.setAlwaysRender(true);
 		app.setTargetFrameRate(60);
-		app.setVSync(true);
 		
 		app.start();
 	}
