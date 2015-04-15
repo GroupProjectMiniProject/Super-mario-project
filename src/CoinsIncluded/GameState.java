@@ -18,9 +18,12 @@ import CoinsIncluded.Coins;
 public class GameState extends BasicGameState {
 	
 	//coins
-	public static ArrayList<Image> coin = new ArrayList<Image>();
+	public static ArrayList<Image> coin = new ArrayList<Image>();	
 	public static ArrayList<Rectangle> coinsShapes = new ArrayList<Rectangle>(), Cpolices = new ArrayList<Rectangle>();
 	public static Point[] arr3 = new Point[4];
+	
+
+
 
 	public static Point[] arr2 = new Point[4];
 	public static ArrayList<Image> platforms = new ArrayList<Image>();
@@ -68,6 +71,9 @@ public class GameState extends BasicGameState {
 		for(int i = 0; i < arr2.length; i++) {
 		    arr3[i] = new Point(0, 0);
 		}
+		
+		//Enemies 
+		dragetexture = new Image ("data/drage.png");
 		
 			
 	}
@@ -143,6 +149,8 @@ public class GameState extends BasicGameState {
 		Mario.draw(mario);
 		//coins
 		Money.draw(money);
+		//
+		drage.draw(dragetexture);
 	}
 	
 	public int getID() {
