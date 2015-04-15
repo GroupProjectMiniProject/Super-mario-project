@@ -48,16 +48,16 @@ public class GameState extends BasicGameState {
 		platform_basic = new Image ("data/Platform_Basic.bmp");
 		//COINS
 		money = new Image("data/mariobroscoin.png");
-		System.out.println("HEY GUYS Textures loaded!");
+		System.out.println("Textures loaded!");
 		
 		//COINS
 		LoadingCoins.start();
 		System.out.println("coins lodaded!");
 		
 		//Loading platforms into scene
-		/*LoadingPlatforms.start();
+		LoadingPlatforms.start();
 		System.out.println("Platforms Loaded!");
-		*/
+		
 		
 		//Assigning arrays
 		for(int i = 0; i < arr2.length; i++) {
@@ -119,9 +119,9 @@ public class GameState extends BasicGameState {
 		background.draw(0, 0);
 
 		//Draw coins
-		/*for (Rectangle rec : coinsShapes) {
+		for (Rectangle rec : coinsShapes) {
 			coin.get(coinsShapes.indexOf(rec)).draw(rec.getX(),rec.getY());
-		}*/
+		}
 		
 		//Draw platforms
 		for (Rectangle rec : platformsShapes){
