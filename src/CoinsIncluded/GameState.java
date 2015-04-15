@@ -18,12 +18,9 @@ import CoinsIncluded.Coins;
 public class GameState extends BasicGameState {
 	
 	//coins
-	public static ArrayList<Image> coin = new ArrayList<Image>();	
+	public static ArrayList<Image> coin = new ArrayList<Image>();
 	public static ArrayList<Rectangle> coinsShapes = new ArrayList<Rectangle>(), Cpolices = new ArrayList<Rectangle>();
 	public static Point[] arr3 = new Point[4];
-	
-
-
 
 	public static Point[] arr2 = new Point[4];
 	public static ArrayList<Image> platforms = new ArrayList<Image>();
@@ -51,16 +48,16 @@ public class GameState extends BasicGameState {
 		platform_basic = new Image ("data/Platform_Basic.bmp");
 		//COINS
 		money = new Image("data/mariobroscoin.png");
-		System.out.println("HEY GUYS Textures loaded!");
+		System.out.println("Textures loaded!");
 		
 		//COINS
 		LoadingCoins.start();
 		System.out.println("coins lodaded!");
 		
 		//Loading platforms into scene
-		/*LoadingPlatforms.start();
+		LoadingPlatforms.start();
 		System.out.println("Platforms Loaded!");
-		*/
+		
 		
 		//Assigning arrays
 		for(int i = 0; i < arr2.length; i++) {
@@ -71,9 +68,6 @@ public class GameState extends BasicGameState {
 		for(int i = 0; i < arr2.length; i++) {
 		    arr3[i] = new Point(0, 0);
 		}
-		
-		//Enemies 
-		dragetexture = new Image ("data/drage.png");
 		
 			
 	}
@@ -125,9 +119,9 @@ public class GameState extends BasicGameState {
 		background.draw(0, 0);
 
 		//Draw coins
-		/*for (Rectangle rec : coinsShapes) {
+		for (Rectangle rec : coinsShapes) {
 			coin.get(coinsShapes.indexOf(rec)).draw(rec.getX(),rec.getY());
-		}*/
+		}
 		
 		//Draw platforms
 		for (Rectangle rec : platformsShapes){
@@ -148,9 +142,7 @@ public class GameState extends BasicGameState {
 		//Draw Mario
 		Mario.draw(mario);
 		//coins
-		Money.draw(money);
-		//
-		drage.draw(dragetexture);
+		//Money.draw(money);
 	}
 	
 	public int getID() {
