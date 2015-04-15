@@ -8,6 +8,5 @@ public class Enemies {
 
 	public void draw(Image image) {
 		image.draw(x, y);
-		
 	}
 }

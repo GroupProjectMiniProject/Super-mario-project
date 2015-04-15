@@ -12,7 +12,7 @@ public class SetupClass extends BasicGame {
 	
 	static int X = 800, Y = 600, jumpSpeed = 12; 
 	
-	static float gravity = 2.0f, acc = 1.2f;
+	static float gravity = 1.3f, acc = 1.2f;
 	
 	private Image mario = null;
 	private Image background = null;
