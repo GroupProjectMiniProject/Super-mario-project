@@ -13,6 +13,8 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+//import CoinsIncluded.Coins;
+
 public class GameState extends BasicGameState {
 	
 	public static Point[] arr2 = new Point[4];
@@ -27,6 +29,7 @@ public class GameState extends BasicGameState {
 	public static Image platform_basic;
 	public static boolean collision = false, fall = false, start = true, jump = false, allowed = true, left = false, right = false, top = false, bot = false;
 	public static Character Mario = new Character();
+	
 		
 	public void init(GameContainer container, StateBasedGame sbg)
 			throws SlickException {
@@ -80,9 +83,8 @@ public class GameState extends BasicGameState {
 		
 		//Collisions with platforms
 		Intersection.start();
-		
-		
 
+		
 	}
 
 	public void render(GameContainer container, StateBasedGame sbg, Graphics g)
@@ -108,8 +110,6 @@ public class GameState extends BasicGameState {
 		
 		//Draw Mario
 		Mario.draw(mario);
-		
-		
 	}
 	
 	public int getID() {

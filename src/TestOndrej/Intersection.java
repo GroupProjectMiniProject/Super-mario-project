@@ -14,6 +14,8 @@ public class Intersection extends GameState {
 		System.out.println("------------Frame-------------");
 		System.out.println("");
 		System.out.println("------------Outter------------");
+		collision = false;
+		
 		for (Rectangle rec : platformsShapes){
 			if (marioShape.intersects(rec)){
 				
