@@ -142,7 +142,7 @@ public class GameState extends BasicGameState {
 		//Draw Mario
 		Mario.draw(mario);
 		//coins
-		Money.draw(money);
+		//Money.draw(money);
 	}
 	
 	public int getID() {

@@ -19,7 +19,7 @@ public class IntersectionCoin extends GameState {
 		for (Rectangle rec : coinsShapes){
 			if (marioShape.intersects(rec)){
 				
-				System.out.println("=>Outter Collision: " + platformsShapes.indexOf(rec));
+				System.out.println("=>Outter Collision: " + coinsShapes.indexOf(rec));
 				System.out.println("Speed: " + Mario.speedX + "/" + Mario.speedY);
 				
 				collision = true;
@@ -35,7 +35,7 @@ public class IntersectionCoin extends GameState {
 				arr3[3].setY(marioShape.getMaxY()-1);
 				
 				bot = top = left = right = false;
-				
+				/*
 				//bot right corner 
 				if (rec.contains(arr3[3].getX()+1, arr3[3].getY())){
 					if (rec.contains(arr3[1].getX(), arr3[1].getY())) 
@@ -79,7 +79,7 @@ public class IntersectionCoin extends GameState {
 						top = true;
 					else {
 						x = Math.abs(arr3[1].getX()-rec.getMinX());
-						y = Math.abs(arr3[1].getY()-rec.getMaxY());
+					    y = Math.abs(arr3[1].getY()-rec.getMaxY());
 						if (x>y || y==19) top = true; 
 						else if (x<y) right = true;
 						else {
@@ -106,32 +106,33 @@ public class IntersectionCoin extends GameState {
 				if (top){
 					Mario.y = (int)(rec.getMaxY());
 					marioShape.setY(Mario.y);
-					jump = false;
-					fall = true;
-					Mario.speedY = 0;
+					//jump = false;
+					//fall = true;
+					//Mario.speedY = 0;
 					System.out.println("top");
 				}
 				if (bot){
 					Mario.y = (int)(rec.getMinY()-marioShape.getHeight());
 					marioShape.setY(Mario.y);
-					Mario.speedY = 0;
-					allowed = true;
-					fall = false;
+					//Mario.speedY = 0;
+					//allowed = true;
+					//fall = false;
 					System.out.println("bot");
 				}
 				
 				if (right){
 					Mario.x = (int)(rec.getMinX()-marioShape.getWidth());
 					marioShape.setX(Mario.x);
-					Mario.speedX = 0;
+					//Mario.speedX = 0;
 					System.out.println("right");
 				}
 				if (left){
 					Mario.x = (int)rec.getMaxX();
 					marioShape.setX(Mario.x);	
-					Mario.speedX = 0;
+					//Mario.speedX = 0;
 					System.out.println("left");
 				}
+				*/
 				System.out.println("----------------");
 				
 			}
