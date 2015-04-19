@@ -2,16 +2,24 @@ package EnemiesIncluded;
 
 import java.util.ArrayList;
 
+
+
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+
+
+
 
 import CoinsIncluded.Coins;
 
@@ -22,11 +30,16 @@ public class GameState extends BasicGameState {
 	public static ArrayList<Rectangle> coinsShapes = new ArrayList<Rectangle>(), Cpolices = new ArrayList<Rectangle>();
 	public static Point[] arr3 = new Point[4];
 	
-	//Enmemies 
+	//Enemies 
 	public static ArrayList<Enemies> enemyList = new ArrayList<Enemies>();
 	public static ArrayList<Image> enemyTexList = new ArrayList<Image>();
-	//public static Enemies enemyDragon = new Enemies(X, X);
+	public static ArrayList<Rectangle> ePolices = new ArrayList<Rectangle>();
+	public static ArrayList<Rectangle> enemyRecList = new ArrayList<Rectangle>();
 	public static Image enemyDragonTex;
+	public static boolean collider = false; 
+	
+
+
 
 	public static Point[] arr2 = new Point[4];
 	public static ArrayList<Image> platforms = new ArrayList<Image>();
@@ -69,6 +82,8 @@ public class GameState extends BasicGameState {
 		//Enemies
 		enemyDragonTex = new Image ("data/drage.png");
 		Enemies.start();
+		
+		
 		//for (int d=1; d<4; d++){
 			//enemyTexList.add(enemyDragonTex);
 		//	enemyList.add(new Enemies(300-(d*20), 9)); //I have to make the parameters linked to the X and Y coordinates??
@@ -121,7 +136,9 @@ public class GameState extends BasicGameState {
 			Mario.x = X-texSize;
 			Mario.speedX = 0;
 		}
-	
+		//Enemies collision 
+		Enemies.intersection();
+		
 		//Collisions with platforms
 		Intersection.start();
 		
@@ -148,20 +165,23 @@ public class GameState extends BasicGameState {
 			platforms.get(platformsShapes.indexOf(rec)).draw(rec.getX(), rec.getY());
 		}
 		
-		//Draw Enemies 
-		for(Enemies dragon: enemyList )
+		//Draw Enemies  
+		for(Enemies dragon: enemyList ) // selecting list items with for loop method 1
 		{
-			enemyTexList.get(enemyList.indexOf(dragon)).draw(dragon.x, dragon.y); //Doesn't get the modified x and y's only the first set
-		}		
-		//for (int i = 1; i < enemyList.size(); i++)
+			enemyTexList.get(enemyList.indexOf(dragon)).draw(dragon.x, dragon.y);
+		}	
+		
+		g.setColor(Color.white);
+		g.drawString("Dragon collides: " + collider, 15, 30);
+	
+		//for (int i = 1; i < enemyList.size(); i++) Selecting list with for loop method 2
 		//{
-	//		enemyList.get(i).draw(enemyTexList.get(i));	
+		//	enemyList.get(i).draw(enemyTexList.get(i));	
 		//}
-		//enemyList.get(0).draw(enemyTexList.get(0));
-		
+		//enemyList.get(0).draw(enemyTexList.get(0)); Selecting list items 
 		//enemyList.get(1).draw(enemyTexList.get(1));
-		
 		//enemyList.get(2).draw(enemyTexList.get(2));
+		
 
 
 
