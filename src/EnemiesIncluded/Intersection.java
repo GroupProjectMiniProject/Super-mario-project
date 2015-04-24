@@ -42,8 +42,8 @@ public class Intersection extends GameState {
 						right = true;
 					else if (rec.contains(arr2[2].getX(), arr2[2].getY())){
 						bot = true;
-						System.out.println(Mario.speedY);
-						System.out.println("bot right");
+						//System.out.println(Mario.speedY);
+						//System.out.println("bot right");
 					}
 						
 					else {
@@ -65,7 +65,7 @@ public class Intersection extends GameState {
 						y = Math.abs(arr2[2].getY()-rec.getMinY());
 						if (x>y) {
 							bot = true; 
-							System.out.println("bot right");
+							//System.out.println("bot right");
 						}
 						else if (x<y) left = true;
 						else {
@@ -109,7 +109,7 @@ public class Intersection extends GameState {
 					jump = false;
 					fall = true;
 					Mario.speedY = 0;
-					System.out.println("top");
+					//System.out.println("top");
 				}
 				if (bot){
 					Mario.y = (int)(rec.getMinY()-marioShape.getHeight());
@@ -117,27 +117,28 @@ public class Intersection extends GameState {
 					Mario.speedY = 0;
 					allowed = true;
 					fall = false;
-					System.out.println("bot");
+					
+					//System.out.println("bot");
 				}
 				
 				if (right){
 					Mario.x = (int)(rec.getMinX()-marioShape.getWidth());
 					marioShape.setX(Mario.x);
 					Mario.speedX = 0;
-					System.out.println("right");
+					//System.out.println("right");
 				}
 				if (left){
 					Mario.x = (int)rec.getMaxX();
 					marioShape.setX(Mario.x);	
 					Mario.speedX = 0;
-					System.out.println("left");
+					//System.out.println("left");
 				}
-				System.out.println("----------------");
+				//System.out.println("----------------");
 				
 			}
 		}
 		if (!collision){
-			System.out.println("Outter: No Collisions");
+			//System.out.println("Outter: No Collisions");
 			
 			fall = true;
 		}

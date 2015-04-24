@@ -5,6 +5,9 @@ import java.util.ArrayList;
 
 
 
+
+import java.util.Iterator;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -20,6 +23,11 @@ import org.newdawn.slick.state.StateBasedGame;
 
 
 
+
+
+
+
+import com.sun.xml.internal.stream.Entity;
 
 import CoinsIncluded.Coins;
 
@@ -37,6 +45,10 @@ public class GameState extends BasicGameState {
 	public static ArrayList<Rectangle> enemyRecList = new ArrayList<Rectangle>();
 	public static Image enemyDragonTex;
 	public static boolean collider = false; 
+	public static boolean enemyStartos = false;
+	public static boolean killMario = false;
+	public static int HP = 10; 
+
 	
 
 
@@ -53,7 +65,8 @@ public class GameState extends BasicGameState {
 	public static Image platform_basic;
 	//COINS
 	public static Image money;
-	public static boolean collision = false, fall = false, start = true, jump = false, allowed = true, left = false, right = false, top = false, bot = false;
+	public static boolean collision = false, fall = false, start = true, jump = false, allowed = true, left = false, right = false, top = false, bot = false, enemyheadQ = false;
+	public static boolean leftE = false, rightE = false, botE = false, topE = false;
 	public static Character Mario = new Character();
 	//COINS
 	public static Coins Money = new Coins();
@@ -81,9 +94,10 @@ public class GameState extends BasicGameState {
 
 		//Enemies
 		enemyDragonTex = new Image ("data/drage.png");
-		Enemies.start();
+		new Enemies(0, 0, 0, 0, 0, null).start();
+
 		
-		
+
 		//for (int d=1; d<4; d++){
 			//enemyTexList.add(enemyDragonTex);
 		//	enemyList.add(new Enemies(300-(d*20), 9)); //I have to make the parameters linked to the X and Y coordinates??
@@ -112,11 +126,16 @@ public class GameState extends BasicGameState {
 		
 		Input input = container.getInput();
 		
+		
+
 		//Loading Mario class (once per game)
 		if (start){
 			Mario.load();
+			enemyStartos = true;
 			start = false;
 			marioShape = new Rectangle (Mario.x, Mario.y, mario.getWidth(), mario.getHeight());
+				
+					
 		}
 		
 		//KeyPressed
@@ -136,9 +155,66 @@ public class GameState extends BasicGameState {
 			Mario.x = X-texSize;
 			Mario.speedX = 0;
 		}
-		//Enemies collision 
+		//Enemies
+			//Collision 
 		Enemies.intersection();
 		
+			//Start patrolling
+		if (enemyStartos)
+		{
+			for (Enemies dra: enemyList)
+			{
+				dra.speedMax = 5; 
+				dra.speedX = 1.0f;
+				enemyStartos = false;
+			}
+		}
+		
+		
+		/*for (int i = enemyList.size()-1; i>= 0; i--)
+		{
+			Rectangle c = enemyList.get(i).BoundingBoxNull;
+		
+			if (c.intersects(marioShape))
+			{
+				arr2[0].setX(marioShape.getMinX());
+				arr2[0].setY(marioShape.getMinY());
+				arr2[1].setX(marioShape.getMaxX());
+				arr2[1].setY(marioShape.getMinY());
+				arr2[2].setX(marioShape.getMinX());
+				arr2[2].setY(marioShape.getMaxY());
+				arr2[3].setX(marioShape.getMaxX());
+				arr2[3].setY(marioShape.getMaxY());
+				
+				if (c.contains(arr2[3].getX()-1, arr2[3].getY()-1) && c.contains(arr2[2].getX()-1, arr2[2].getY()-1)) {
+					HP--;
+
+				} else if (fall && c.contains(arr2[1].getX()-1, arr2[1].getY()-1) || c.contains(arr2[0].getX()-1, arr2[0].getY()-1)){
+						enemyheadQ = true;
+						enemyList.remove(i);
+				}
+		}
+		}*/
+	
+		//Continue patrolling
+		for (Enemies drago: enemyList)
+		{		
+				if (drago.x == drago.overX) // idea: add parameters enemies so they have a fixed max and min movement
+					drago.speedX = -1.0f;
+				if (drago.x == drago.belowX)
+					drago.speedX = 1.0f;
+		}
+
+		
+		//Movement
+		for (Enemies drago: enemyList)
+		{			
+			drago.x += (int)drago.speedX;
+		}
+		
+		//if(enemyList.get(2).speedX);
+		IntersectionEnemies.start();
+
 		//Collisions with platforms
 		Intersection.start();
 		
@@ -172,7 +248,9 @@ public class GameState extends BasicGameState {
 		}	
 		
 		g.setColor(Color.white);
-		g.drawString("Dragon collides: " + collider, 15, 30);
+		g.drawString("Mario HP: " + HP, 15, 60);
+		g.drawString("Enemy Dead: " + enemyheadQ, 15, 30);
+
 	
 		//for (int i = 1; i < enemyList.size(); i++) Selecting list with for loop method 2
 		//{
@@ -195,8 +273,16 @@ public class GameState extends BasicGameState {
 			g.draw(r);
 		}
 		
+		for (Rectangle r: ePolices){
+			g.draw(r);
+		}
+		
+		 Mario.draw(mario);
+
 		//Draw Mario
-		Mario.draw(mario);
+		if (killMario)
+			mario.drawFlash(Mario.x, Mario.y);
+
 		//coins
 		//Money.draw(money);
 	}

@@ -24,7 +24,7 @@ public class MenuState extends BasicGameState {
 	public void render(GameContainer container, StateBasedGame sbg, Graphics g)
 			throws SlickException {
 		g.drawString("Stage 0", 50, 30);
-		g.drawString("Press ENTER to start the game! you fucker", 50, 50);
+		g.drawString("Hello Motherfucker!Press ENTER to start the game cunt", 50, 50);
 	}
 
 	public int getID() {
