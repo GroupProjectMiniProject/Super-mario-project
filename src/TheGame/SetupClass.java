@@ -1,5 +1,7 @@
 package TheGame;
 
+import java.util.ArrayList;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -18,6 +20,7 @@ public class SetupClass extends BasicGame {
 	private Image background = null;
 	private Image platform_basic = null;
 	private Image evilEnemy = null;
+	private ArrayList<Enemies> enarray = new ArrayList<Enemies>();
 
 	
 	private boolean start = true, jump = false, allowed = true, enemyStart = true;
@@ -35,6 +38,8 @@ public class SetupClass extends BasicGame {
 		background = new Image ("data/Background_Basic.bmp");
 		platform_basic = new Image ("data/Platform_Basic.bmp");
 		evilEnemy = new Image ("data/enemy.png");
+		for (int i = 0; i < 4; i++)
+			enarray.add(new Enemies());
 		
 	}
 
@@ -53,8 +58,6 @@ public class SetupClass extends BasicGame {
 			Bomb.speedY = 0.0f;
 			Bomb.speedMax = 5;
 			start = false;
-			
-			
 		}
 		
 	
@@ -126,6 +129,7 @@ public class SetupClass extends BasicGame {
 		}
 		Mario.draw(mario);
 		Bomb.draw(evilEnemy);
+		
 	}
 	
 	public static void main(String[] args) throws SlickException {
