@@ -11,16 +11,14 @@ public class IntersectionCoin extends GameState {
 	public static void start (){
 		
 		Cpolices.clear();
-		System.out.println("------------Frame-------------");
-		System.out.println("");
-		System.out.println("------------Outter------------");
+		//System.out.println("------------Frame-------------");
+		//System.out.println("");
+		//System.out.println("------------Outter------------");
 		collision = false;
 		
 		for (Rectangle rec : coinsShapes){
 			if (marioShape.intersects(rec)){
 				
-				System.out.println("=>Outter Collision: " + coinsShapes.indexOf(rec));
-				System.out.println("Speed: " + Mario.speedX + "/" + Mario.speedY);
 				
 				collision = true;
 				Cpolices.add(new Rectangle(rec.getMinX(), rec.getMinY(), texSize, texSize));
@@ -133,15 +131,14 @@ public class IntersectionCoin extends GameState {
 					System.out.println("left");
 				}
 				*/
-				System.out.println("----------------");
+				//System.out.println("----------------");
 				
 			}
 		}
-		if (!collision){
-			System.out.println("Outter: No Collisions");
+		//if (!collision){
+		//System.out.println("Outter: No Collisions");
 			
-			fall = true;
-		}
+		//}
 	}
 
 }

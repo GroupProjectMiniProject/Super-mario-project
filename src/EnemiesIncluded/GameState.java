@@ -28,6 +28,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 
 
+
 import com.sun.xml.internal.stream.Entity;
 
 import CoinsIncluded.Coins;
@@ -49,7 +50,7 @@ public class GameState extends BasicGameState {
 	public static boolean enemyStartos = false;
 	public static boolean killMario = false;
 	public static int HP = 10; 
-	public static boolean eCollision = true;
+	public static boolean eCollision = false;
 	public static boolean eFall = true;
 
 
@@ -98,7 +99,7 @@ public class GameState extends BasicGameState {
 
 		//Enemies
 		enemyDragonTex = new Image ("data/drage.png");
-		new Enemies(0, 0, 0, 0, 0, null).start();
+		new Enemies(0, 0, 0, 0, 0, 0, null, false).start();
 
 		
 
@@ -169,61 +170,46 @@ public class GameState extends BasicGameState {
 			for (Enemies dra: enemyList)
 			{
 				dra.speedMax = 5; 
-				dra.speedX = 1.0f;
+				dra.speedX = -1.0f;
+				
+				//dra.speedY = 1.0f;
+
 				enemyStartos = false;
-				dra.speedY = 1.0F;
 
 			}
 		}
+	
 		
 		/*for (int i = enemyList.size()-1; i>= 0; i--)
-		{
-			Rectangle c = enemyList.get(i).BoundingBoxNull;
-		
-			if (c.intersects(marioShape))
-			{
-				arr2[0].setX(marioShape.getMinX());
-				arr2[0].setY(marioShape.getMinY());
-				arr2[1].setX(marioShape.getMaxX());
-				arr2[1].setY(marioShape.getMinY());
-				arr2[2].setX(marioShape.getMinX());
-				arr2[2].setY(marioShape.getMaxY());
-				arr2[3].setX(marioShape.getMaxX());
-				arr2[3].setY(marioShape.getMaxY());
-				
-				if (c.contains(arr2[3].getX()-1, arr2[3].getY()-1) && c.contains(arr2[2].getX()-1, arr2[2].getY()-1)) {
-					HP--;
-
-				} else if (fall && c.contains(arr2[1].getX()-1, arr2[1].getY()-1) || c.contains(arr2[0].getX()-1, arr2[0].getY()-1)){
 						enemyheadQ = true;
-						enemyList.remove(i);
-				}
-		}
-		}*/
+						enemyList.remove(i); }*/ 
 	
-		//Continue patrolling
+		
+		//Enemy borders
 		for (Enemies drago: enemyList)
-		{		
-				if (drago.x == drago.overX) // idea: add parameters enemies so they have a fixed max and min movement
-					drago.speedX = -1.0f;
-				if (drago.x == drago.belowX)
-					drago.speedX = 1.0f;
-		}
-
+		{			
+			if (drago.x < 0) {
+				drago.x = 4;
+				drago.speedX = 1.0f;
+			}
+			if (drago.x > X-texSize) {
+				drago.x = (X-texSize-4);
+				drago.speedX = -1.0f;
+			}
+		}	
 		
 		//Movement
 		for (Enemies drago: enemyList)
 		{			
 			drago.x += (int)drago.speedX;
+			drago.y += (int)drago.speedY;
 		}
+				
 		
-		//if(enemyList.get(2).speedX);
-		//IntersectionEnemies.start();
-
-		//Collisions with platforms
+		//Mario and Enemy collisions with platforms
 		Intersection.start();
 		
-        //COINS
+        //Coins Loading
 		IntersectionCoin.start();
 	}
 

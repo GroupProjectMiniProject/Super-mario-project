@@ -10,9 +10,19 @@ public class LoadingPlatforms extends GameState {
 		for (int i=0; i<X; i+=texSize){
 			platforms.add(platform_basic);
 			platformsShapes.add(new Rectangle(i, bottom, texSize, texSize));
+		
 		}
 		platforms.add(platform_basic);
-		platformsShapes.add(new Rectangle (X-texSize, bottom-5*texSize, texSize, texSize));
+		platformsShapes.add(new Rectangle (200, 400, texSize, texSize));
+		
+		platforms.add(platform_basic);
+		platformsShapes.add(new Rectangle (200-texSize, 400+texSize, texSize, texSize));
+		
+		platforms.add(platform_basic);
+		platformsShapes.add(new Rectangle (200-2*texSize, 400+2*texSize, texSize, texSize));
+		platforms.add(platform_basic);
+		
+		platformsShapes.add(new Rectangle (200-3*texSize, 400+3*texSize, 4*texSize, texSize));
 		
 		platforms.add(platform_basic);
 		platformsShapes.add(new Rectangle (X-texSize*4, bottom-4*texSize, texSize, texSize));
