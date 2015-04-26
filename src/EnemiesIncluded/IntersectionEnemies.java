@@ -1,4 +1,4 @@
-package EnemiesIncluded;
+/*package EnemiesIncluded;
 
 import org.newdawn.slick.geom.Rectangle;
 
@@ -25,7 +25,7 @@ public class IntersectionEnemies extends GameState {
 				System.out.println("Speed: " + Mario.speedX + "/" + Mario.speedY);
 				
 				collision = true;
-				ePolices.add(new Rectangle(c.getMinX(), c.getMinY(), enemyDragonTex.getWidth(), enemyDragonTex.getHeight()));
+				//ePolices.add(new Rectangle(c.getMinX(), c.getMinY(), enemyDragonTex.getWidth(), enemyDragonTex.getHeight()));
 				
 				arr2[0].setX(marioShape.getMinX()-2);
 				arr2[0].setY(marioShape.getMinY()-2);
@@ -114,4 +114,4 @@ public class IntersectionEnemies extends GameState {
 		
 	}
 
-}
+}*/

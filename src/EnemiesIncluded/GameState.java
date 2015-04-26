@@ -27,6 +27,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 
 
+
 import com.sun.xml.internal.stream.Entity;
 
 import CoinsIncluded.Coins;
@@ -48,6 +49,9 @@ public class GameState extends BasicGameState {
 	public static boolean enemyStartos = false;
 	public static boolean killMario = false;
 	public static int HP = 10; 
+	public static boolean eCollision = true;
+	public static boolean eFall = true;
+
 
 	
 
@@ -167,9 +171,10 @@ public class GameState extends BasicGameState {
 				dra.speedMax = 5; 
 				dra.speedX = 1.0f;
 				enemyStartos = false;
+				dra.speedY = 1.0F;
+
 			}
 		}
-		
 		
 		/*for (int i = enemyList.size()-1; i>= 0; i--)
 		{
@@ -213,7 +218,7 @@ public class GameState extends BasicGameState {
 		}
 		
 		//if(enemyList.get(2).speedX);
-		IntersectionEnemies.start();
+		//IntersectionEnemies.start();
 
 		//Collisions with platforms
 		Intersection.start();
