@@ -153,32 +153,32 @@ public class Intersection extends GameState {
 				
 						
 				eCollision = true;
-				ePolices.add(new Rectangle(rec.getMinX(), rec.getMinY(), texSize, texSize));
+				//ePolices.add(new Rectangle(rec.getMinX(), rec.getMinY(), texSize, texSize));
 				
-				arr2[0].setX(c.getMinX()+1);
-				arr2[0].setY(c.getMinY()+1);
-				arr2[1].setX(c.getMaxX()-1);
-				arr2[1].setY(c.getMinY()+1);
-				arr2[2].setX(c.getMinX()+1);
-				arr2[2].setY(c.getMaxY()-1);
-				arr2[3].setX(c.getMaxX()-1);
-				arr2[3].setY(c.getMaxY()-1);
+				enemyArray[0].setX(c.getMinX()+1);
+				enemyArray[0].setY(c.getMinY()+1);
+				enemyArray[1].setX(c.getMaxX()-1);
+				enemyArray[1].setY(c.getMinY()+1);
+				enemyArray[2].setX(c.getMinX()+1);
+				enemyArray[2].setY(c.getMaxY()-1);
+				enemyArray[3].setX(c.getMaxX()-1);
+				enemyArray[3].setY(c.getMaxY()-1);
 				
 				botE = topE = leftE = rightE = false;  //think i need parameters for top left right and bot
 				
 				//bot right corner 
-				if (rec.contains(arr2[3].getX()+1, arr2[3].getY())){
-					if (rec.contains(arr2[1].getX(), arr2[1].getY())) 
+				if (rec.contains(enemyArray[3].getX()+1, enemyArray[3].getY())){
+					if (rec.contains(enemyArray[1].getX(), enemyArray[1].getY())) 
 						rightE = true;
-					else if (rec.contains(arr2[2].getX(), arr2[2].getY())){
+					else if (rec.contains(enemyArray[2].getX(), enemyArray[2].getY())){
 						botE = true;
 						//System.out.println(Mario.speedY);
 						//System.out.println("bot right");
 					}
 						
 					else {
-						x = Math.abs(arr2[3].getX()-rec.getMinX());
-						y = Math.abs(arr2[3].getY()-rec.getMinY());
+						x = Math.abs(enemyArray[3].getX()-rec.getMinX());
+						y = Math.abs(enemyArray[3].getY()-rec.getMinY());
 						if (x>y) botE = true; 
 						else if (x<y) rightE = true;
 						else {
@@ -187,12 +187,12 @@ public class Intersection extends GameState {
 						}
 					}
 				//bot left corner	
-				} else if (rec.contains(arr2[2].getX(), arr2[2].getY())){
-					if (rec.contains(arr2[0].getX(), arr2[0].getY()))
+				} else if (rec.contains(enemyArray[2].getX(), enemyArray[2].getY())){
+					if (rec.contains(enemyArray[0].getX(), enemyArray[0].getY()))
 						leftE = true;
 					else {
-						x = Math.abs(arr2[2].getX()-rec.getMaxX());
-						y = Math.abs(arr2[2].getY()-rec.getMinY());
+						x = Math.abs(enemyArray[2].getX()-rec.getMaxX());
+						y = Math.abs(enemyArray[2].getY()-rec.getMinY());
 						if (x>y) {
 							botE = true; 
 							//System.out.println("bot right");
@@ -204,12 +204,12 @@ public class Intersection extends GameState {
 						}
 					}	
 				//top right corner
-				} else if (rec.contains(arr2[1].getX(), arr2[1].getY())){
-					if (rec.contains(arr2[0].getX(), arr2[0].getY())) 
+				} else if (rec.contains(enemyArray[1].getX(), enemyArray[1].getY())){
+					if (rec.contains(enemyArray[0].getX(), enemyArray[0].getY())) 
 						topE = true;
 					else {
-						x = Math.abs(arr2[1].getX()-rec.getMinX());
-						y = Math.abs(arr2[1].getY()-rec.getMaxY());
+						x = Math.abs(enemyArray[1].getX()-rec.getMinX());
+						y = Math.abs(enemyArray[1].getY()-rec.getMaxY());
 						if (x>y || y==19) topE = true; 
 						else if (x<y) rightE = true;
 						else {
@@ -218,9 +218,9 @@ public class Intersection extends GameState {
 						}
 					}
 				//top left corner
-				} else if (rec.contains(arr2[0].getX(), arr2[0].getY())){
-					x = Math.abs(arr2[0].getX()-rec.getMinX());
-					y = Math.abs(arr2[0].getY()-rec.getMaxY());
+				} else if (rec.contains(enemyArray[0].getX(), enemyArray[0].getY())){
+					x = Math.abs(enemyArray[0].getX()-rec.getMinX());
+					y = Math.abs(enemyArray[0].getY()-rec.getMaxY());
 					if (x>y || y==19) topE = true; 
 					else if (x<y) leftE = true;
 					else {
