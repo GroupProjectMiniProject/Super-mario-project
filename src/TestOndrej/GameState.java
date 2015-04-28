@@ -12,20 +12,22 @@ import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public class GameState extends BasicGameState {
 	
 	public static Point[] arr2 = new Point[4];
 	public static ArrayList<Image> platforms = new ArrayList<Image>();
 	public static ArrayList<Rectangle> platformsShapes = new ArrayList<Rectangle>(), polices = new ArrayList<Rectangle>();
+	public static Rectangle flagShape;
 	public static int X = 800, Y = 600, jumpSpeed = 20, fallSpeed = 10 , texSize = 32, bottom = Y-texSize; 
 	public static float x = 0, y = 0;
 	public static float gravity = 1.3f, acc = 1.4f;
 	public static Rectangle marioShape;
-	public static Image mario;
-	public static Image background;
+	public static Image mario, background, flag;
 	public static Image platform_basic;
-	public static boolean collision = false, fall = false, start = true, jump = false, allowed = true, left = false, right = false, top = false, bot = false;
+	public static boolean finish = false, collision = false, fall = false, start = true, jump = false, allowed = true, left = false, right = false, top = false, bot = false;
 	public static Character Mario = new Character();
 		
 	public void init(GameContainer container, StateBasedGame sbg)
@@ -35,13 +37,14 @@ public class GameState extends BasicGameState {
 		mario = new Image ("data/Mario_Basic.png");
 		background = new Image ("data/Background_Basic.bmp");
 		platform_basic = new Image ("data/Platform_Basic.bmp");
+		flag = new Image ("data/flag.png");
 		System.out.println("Textures loaded!");
 		
 		//Loading platforms into scene
 		LoadingPlatforms.start();
 		System.out.println("Platforms Loaded!");
 		
-		//Assigning arrays
+		//Assigning arrays of points
 		for(int i = 0; i < arr2.length; i++) {
 		    arr2[i] = new Point(0, 0);
 		}
@@ -57,6 +60,7 @@ public class GameState extends BasicGameState {
 		if (start){
 			Mario.load();
 			start = false;
+			finish = false;
 			marioShape = new Rectangle (Mario.x, Mario.y, mario.getWidth(), mario.getHeight());
 		}
 		
@@ -81,7 +85,13 @@ public class GameState extends BasicGameState {
 		//Collisions with platforms
 		Intersection.start();
 		
+		if (finish) {
+			finish = false;
+			start = true;
+			sbg.enterState(2, new FadeOutTransition(), new FadeInTransition());
+		}
 		
+		System.out.println(marioShape.getCenterX() + ":" + marioShape.getCenterY() + "/" + flagShape.getMinX() + ":" + flagShape.getMinY());
 
 	}
 
@@ -94,10 +104,12 @@ public class GameState extends BasicGameState {
 		//Draw background image
 		background.draw(0, 0);
 
-		//Draw platforms
+		//Draw platforms & flag
 		for (Rectangle rec : platformsShapes){
 			platforms.get(platformsShapes.indexOf(rec)).draw(rec.getX(), rec.getY());
 		}
+		
+		flag.draw(flagShape.getMinX(), flagShape.getMinY(), flagShape.getWidth(), flagShape.getHeight());
 
 		
 		//Interaction notifiers
@@ -105,6 +117,7 @@ public class GameState extends BasicGameState {
 		for (Rectangle r : polices){
 			g.draw(r);
 		}
+		g.setColor(Color.white);
 		
 		//Draw Mario
 		Mario.draw(mario);

@@ -13,7 +13,6 @@ public class GameOverState extends BasicGameState {
 
 	public void init(GameContainer container, StateBasedGame sbg)
 			throws SlickException {
-		
 	}
 	
 	public void update(GameContainer container, StateBasedGame sbg, int delta)

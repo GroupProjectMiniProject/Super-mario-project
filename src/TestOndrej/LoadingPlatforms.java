@@ -20,6 +20,8 @@ public class LoadingPlatforms extends GameState {
 		platforms.add(platform_basic);
 		platformsShapes.add(new Rectangle (0, bottom-2*texSize, texSize, texSize));
 		
+		flagShape = new Rectangle(X-texSize, bottom-texSize, texSize, texSize);
+		
 		int count = 0;
 		for (Rectangle rec : platformsShapes){
 			count++;
