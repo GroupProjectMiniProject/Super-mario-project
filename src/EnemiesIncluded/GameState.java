@@ -162,7 +162,7 @@ public class GameState extends BasicGameState {
 		}
 		//Enemies
 			//Collision 
-		new Enemies(0, 0, 0, 0, 0, 0, null, null, null, false).intersection();
+		Enemies.intersection();
 
 			//Start patrolling
 		if (enemyStartos)

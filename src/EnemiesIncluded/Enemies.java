@@ -54,7 +54,7 @@ public class Enemies extends GameState {
 	}
 	
 	
-	public void intersection() {
+	public static void intersection() {
 		
 			for(Enemies dragonas: enemyList ){
 	
