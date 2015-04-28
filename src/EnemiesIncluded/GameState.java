@@ -27,7 +27,6 @@ import org.newdawn.slick.state.StateBasedGame;
 
 
 
-import CoinsIncluded.Coins;
 
 public class GameState extends BasicGameState {
 	
