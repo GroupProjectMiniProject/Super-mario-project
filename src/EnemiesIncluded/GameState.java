@@ -52,9 +52,9 @@ public class GameState extends BasicGameState {
 	public static int HP = 10; 
 	public static boolean eCollision = false;
 	public static boolean eFall = true;
-
-
-	
+	public static Point[] enemyArray = new Point[4];
+	public static Point[] arrRed = new Point[4];
+	public static Point[] arrPur = new Point[4];
 
 
 
@@ -76,7 +76,9 @@ public class GameState extends BasicGameState {
 	//COINS
 	public static Coins Money = new Coins();
 	public static Image Dragon;
-	
+	public static Rectangle marioRedBox;
+	public static Rectangle marioPurBox;
+
 		
 	public void init(GameContainer container, StateBasedGame sbg)
 			throws SlickException {
@@ -98,8 +100,8 @@ public class GameState extends BasicGameState {
 		//System.out.println("Enemy loaded");
 
 		//Enemies
-		enemyDragonTex = new Image ("data/drage.png");
-		new Enemies(0, 0, 0, 0, 0, 0, null, false).start();
+		enemyDragonTex = new Image ("data/drage3.png");
+		new Enemies(0, 0, 0, 0, 0, 0, null, null, null, false).start();
 
 		
 
@@ -137,9 +139,11 @@ public class GameState extends BasicGameState {
 		if (start){
 			Mario.load();
 			enemyStartos = true;
-			start = false;
 			marioShape = new Rectangle (Mario.x, Mario.y, mario.getWidth(), mario.getHeight());
-				
+			marioPurBox = new Rectangle (Mario.x+1, Mario.y+1, mario.getWidth(), mario.getHeight()/2);
+			marioRedBox = new Rectangle (Mario.x+1, Mario.y+(mario.getHeight()/2), mario.getWidth(), mario.getHeight()/2);
+			start = false;
+
 					
 		}
 		
@@ -170,7 +174,7 @@ public class GameState extends BasicGameState {
 			for (Enemies dra: enemyList)
 			{
 				dra.speedMax = 5; 
-				dra.speedX = -1.0f;
+				dra.speedX = 0.0f;
 				
 				//dra.speedY = 1.0f;
 
@@ -263,11 +267,12 @@ public class GameState extends BasicGameState {
 		for (Rectangle r : Cpolices){
 			g.draw(r);
 		}
-		
+		g.setColor(Color.red);
+
 		for (Rectangle r: ePolices){
 			g.draw(r);
 		}
-		
+			
 		 Mario.draw(mario);
 
 		//Draw Mario
@@ -277,6 +282,10 @@ public class GameState extends BasicGameState {
 		//coins
 		//Money.draw(money);
 	}
+	
+	
+	
+	
 
 	@Override
 	public int getID() {
