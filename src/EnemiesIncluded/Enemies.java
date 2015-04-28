@@ -48,7 +48,7 @@ public class Enemies extends GameState {
 		
 		for (int d=1; d<4; d++){
 			enemyTexList.add(enemyDragonTex);
-			enemyList.add(new Enemies(200+d*100, 530, 0.0f, 0.0f, 50, 50, BoundingBoxNull, BoundingBoxRed, BoundingBoxPurple, false)); //I have to make the parameters linked to the X and Y coordinates??
+			enemyList.add(new Enemies(200+d*100, 500, 0.0f, 0.0f, 50, 50, BoundingBoxNull, BoundingBoxRed, BoundingBoxPurple, false)); //I have to make the parameters linked to the X and Y coordinates??
 			System.out.printf("Enemy %d loaded \n", d);
 		}	
 	}
