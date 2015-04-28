@@ -239,7 +239,7 @@ public class GameState extends BasicGameState {
 		
 		g.setColor(Color.white);
 		g.drawString("Mario HP: " + HP, 15, 60);
-		g.drawString("Enemy Dead: " + enemyheadQ, 15, 30);
+		g.drawString("Enemy adawdDead: " + enemyheadQ, 15, 30);
 
 	
 		//for (int i = 1; i < enemyList.size(); i++) Selecting list with for loop method 2
