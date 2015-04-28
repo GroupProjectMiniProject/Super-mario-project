@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="3">
+ <tileset firstgid="1" name="hexmini" tilewidth="32" tileheight="32">
+  <image source="../../../../../../Program Files (x86)/Tiled/examples/hexmini.png" width="106" height="72"/>
+ </tileset>
+ <tileset firstgid="7" name="seamless_tiled_grass_texture_by_lendrick" tilewidth="32" tileheight="32">
+  <image source="../../../../Desktop/seamless_tiled_grass_texture_by_lendrick.jpg" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="1031" name="download (1)" tilewidth="32" tileheight="32">
+  <image source="../../../../Desktop/download (1).jpg" width="259" height="194"/>
+ </tileset>
+ <tileset firstgid="1079" name="download" tilewidth="32" tileheight="32">
+  <image source="../../../../Desktop/download.jpg" width="259" height="194"/>
+ </tileset>
+ <layer name="Background" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3X6U4UQRRAYX5MAi64G1HcFTdQFJcX8Iesw4678v5PweloJ51K9QJOmLLrfMmJME6AvjfdFJODiYkpOkNn6Rydp2m6QBcTq++Ka7xEl+kKXaVrdD2B2ee4jxtc4wzdpFs0S7fpDt1NYP657eMe13ifHtBDekSPaY6eJDD/3PbxlGt8Rs/pBc3TAr2kVwnMP7d9LHKNr+kNLdFbekfv6UMC889tH5OD+vPVKOc46z46Ka4xdr4a932Q6z7qzlfFtXu+On2x81V57Smer/q+k9j5atzzznkfi4M/56viOpcSmHXu+zjOHD4GuY/Rcx9p+d/20XfuIy3LtEKrtEbrtEFD2qQt2qYd2qU92qcD+kxf6Ct9o+/0g37SL/pNh6f0PQ5HOpXx6cs++mKFZ8AqrdE6faLlv//WtRkUey1W29cov3f4M23QMINnVSG2jy7z3aJt2glm2jTPsLb35biP6vzCPVRnvkt7J5h5tYOg2Htyv0eq1163g/3KDNvmFZt5+XHs64W1/Qx9F5vtv9wfsZk3zbdu79WPc7k3CuFsy2fWSZ9V4XOvaRfDhv8L35fLPkZ5b5TPsy67KOuyj3InOehyb4R7CM+/x3l+hZ/X7SO2vxyEZ6u6+6Lpb4em+6Dtd0XstVx/lxfCGcdm2/b3R5cZd30td11nLEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSxucIRKzv0ECcAAA=
+  </data>
+ </layer>
+ <layer name="Foreground " width="100" height="100" visible="0">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BMQEAAADCoPVP7WULoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgBt5RKnmQJwAAA==
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1">
+  <properties>
+   <property name="blocked" value="true"/>
+  </properties>
+  <object id="1" x="342" y="397" width="150" height="112"/>
+  <object id="2" x="186" y="192"/>
+ </objectgroup>
+</map>
