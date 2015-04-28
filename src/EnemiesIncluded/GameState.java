@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 
 
-import java.util.Iterator;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -14,10 +13,8 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -29,7 +26,6 @@ import org.newdawn.slick.state.StateBasedGame;
 
 
 
-import com.sun.xml.internal.stream.Entity;
 
 import CoinsIncluded.Coins;
 
@@ -44,11 +40,15 @@ public class GameState extends BasicGameState {
 	public static ArrayList<Enemies> enemyList = new ArrayList<Enemies>();
 	public static ArrayList<Image> enemyTexList = new ArrayList<Image>();
 	public static ArrayList<Rectangle> ePolices = new ArrayList<Rectangle>();
+	public static ArrayList<Rectangle> RedPolices = new ArrayList<Rectangle>();
+
 	public static ArrayList<Rectangle> enemyRecList = new ArrayList<Rectangle>();
 	public static Image enemyDragonTex;
 	public static boolean collider = false; 
 	public static boolean enemyStartos = false;
 	public static boolean killMario = false;
+	public static boolean killEnemy = false;
+
 	public static int HP = 10; 
 	public static boolean eCollision = false;
 	public static boolean eFall = true;
@@ -76,8 +76,6 @@ public class GameState extends BasicGameState {
 	//COINS
 	public static Coins Money = new Coins();
 	public static Image Dragon;
-	public static Rectangle marioRedBox;
-	public static Rectangle marioPurBox;
 
 		
 	public void init(GameContainer container, StateBasedGame sbg)
@@ -140,8 +138,6 @@ public class GameState extends BasicGameState {
 			Mario.load();
 			enemyStartos = true;
 			marioShape = new Rectangle (Mario.x, Mario.y, mario.getWidth(), mario.getHeight());
-			marioPurBox = new Rectangle (Mario.x+1, Mario.y+1, mario.getWidth(), mario.getHeight()/2);
-			marioRedBox = new Rectangle (Mario.x+1, Mario.y+(mario.getHeight()/2), mario.getWidth(), mario.getHeight()/2);
 			start = false;
 
 					
@@ -166,15 +162,15 @@ public class GameState extends BasicGameState {
 		}
 		//Enemies
 			//Collision 
-		Enemies.intersection();
-		
+		new Enemies(0, 0, 0, 0, 0, 0, null, null, null, false).intersection();
+
 			//Start patrolling
 		if (enemyStartos)
 		{
 			for (Enemies dra: enemyList)
 			{
 				dra.speedMax = 5; 
-				dra.speedX = 0.0f;
+				dra.speedX = 1.0f;
 				
 				//dra.speedY = 1.0f;
 
@@ -267,17 +263,23 @@ public class GameState extends BasicGameState {
 		for (Rectangle r : Cpolices){
 			g.draw(r);
 		}
-		g.setColor(Color.red);
+		/*for (Rectangle r: RedPolices){
+			g.draw(r);
+		}
+		g.setColor(Color.magenta);
 
 		for (Rectangle r: ePolices){
 			g.draw(r);
-		}
+		}*/
 			
 		 Mario.draw(mario);
 
 		//Draw Mario
 		if (killMario)
 			mario.drawFlash(Mario.x, Mario.y);
+		for (Enemies dragons: enemyList)
+		if (killEnemy)
+			enemyDragonTex.drawFlash(dragons.x, dragons.y);
 
 		//coins
 		//Money.draw(money);

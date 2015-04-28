@@ -286,7 +286,7 @@ public class Intersection extends GameState {
 		}
 		}
 		
-		/*for (Enemies dragons: enemyList){
+		for (Enemies dragons: enemyList){
 		
 		if (dragons.falling) {
 		if (dragons.speedY == 0) 
@@ -295,7 +295,7 @@ public class Intersection extends GameState {
 			dragons.speedY *= gravity; 
 		//eFall = false;
 		}
-	}*/
+	}
 		
 			
 	}

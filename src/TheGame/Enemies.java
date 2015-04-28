@@ -7,7 +7,6 @@ import org.newdawn.slick.state.StateBasedGame;
 public class Enemies {
 	public int x, y, speedMax, health;
 	public float speedX, speedY;
-	private Image evilEnemy = null;
 
 
 	public void draw(Image image) {
