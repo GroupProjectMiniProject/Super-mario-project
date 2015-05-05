@@ -30,7 +30,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class GameState extends BasicGameState {
 	
-	//coins
+	//Coins
 	public static ArrayList<Image> coin = new ArrayList<Image>();
 	public static ArrayList<Rectangle> coinsShapes = new ArrayList<Rectangle>(), Cpolices = new ArrayList<Rectangle>();
 	public static Point[] arr3 = new Point[4];
@@ -55,12 +55,18 @@ public class GameState extends BasicGameState {
 	public static boolean eFall = false;
 	public static Point[] enemyArray = new Point[4];
 
-// Platforms
+	//Platforms
 	public static ArrayList<Image> platforms = new ArrayList<Image>();
 	public static ArrayList<Rectangle> platformsShapes = new ArrayList<Rectangle>(), polices = new ArrayList<Rectangle>();
 
-	// PowerUps
-// Mario
+	//PowerUps
+	public static ArrayList<Image> powerUpTexList = new ArrayList<Image>();
+	public static Image powerUpTex;
+	public static ArrayList<Rectangle> powerUpList = new ArrayList<Rectangle>();
+	public static boolean poweredUp = false; 
+
+	
+	//Mario
 	public static int HP = 3; 
 	public static Point[] arr2 = new Point[4];
 	public static int X = 800, Y = 600, jumpSpeed = 20, fallSpeed = 10 , texSize = 32, bottom = Y-texSize; 
@@ -70,6 +76,7 @@ public class GameState extends BasicGameState {
 	public static Image mario;
 	public static Image background;
 	public static Image platform_basic;
+	public static Image marioPowUp;
 	
 
 		
@@ -79,34 +86,28 @@ public class GameState extends BasicGameState {
 		mario = new Image ("data/Mario_Basic.png");
 		background = new Image ("data/Background_Basic.bmp");
 		platform_basic = new Image ("data/Platform_Basic.bmp");
-		//COINS
 		money = new Image("data/mariobroscoin.png");
-		System.out.println("Textures loaded!");
+		enemyDragonTex = new Image ("data/drage3.png");
+		powerUpTex = new Image("data/mush.png");
+		marioPowUp = new Image ( "data/marioBig.png");
 		
-		//COINS
+		System.out.println("Textures Loaded!");
+		
+		//Loading Coins
 		LoadingCoins.start();
-		System.out.println("coins lodaded!");
+		System.out.println("Coins Loaded!");
 		
 		//Loading platforms into scene
 		LoadingPlatforms.start();
 		System.out.println("Platforms Loaded!");
 		//System.out.println("Enemy loaded");
 
-		//Enemies
-		enemyDragonTex = new Image ("data/drage3.png");
+		//Loading Enemies
 		new Enemies(0, 0, 0, 0, 0, 0, null, null, null, false).start();
-
+		System.out.println("Enemies Loaded");
 		
-
-		//for (int d=1; d<4; d++){
-			//enemyTexList.add(enemyDragonTex);
-		//	enemyList.add(new Enemies(300-(d*20), 9)); //I have to make the parameters linked to the X and Y coordinates??
-		//	System.out.printf("Enemy %d loaded \n", d);
-//			
-
-		//}
-	
-		
+		//Loading PowerUPs
+		PowerUp.start();
 		
 		//Assigning arrays
 			//Mario
@@ -117,7 +118,6 @@ public class GameState extends BasicGameState {
 		for(int i = 0; i < enemyArray.length; i++) {
 		    enemyArray[i] = new Point(0, 0);
 		}
-		
 			//Coins
 		for(int i = 0; i < arr2.length; i++) {
 		    arr3[i] = new Point(0, 0);
@@ -131,17 +131,15 @@ public class GameState extends BasicGameState {
 		
 		Input input = container.getInput();
 		
-		
 
 		//Loading Mario class (once per game)
 		if (start){
 			Mario.load();
 			enemyStartos = true;
 			marioShape = new Rectangle (Mario.x, Mario.y, mario.getWidth(), mario.getHeight());
-			start = false;
-
-					
+			start = false;			
 		}
+	
 		
 		//KeyPressed
 		KeyPressed.start(input, sbg);
@@ -160,11 +158,13 @@ public class GameState extends BasicGameState {
 			Mario.x = X-texSize;
 			Mario.speedX = 0;
 		}
-		//Enemies
-			//Collision 
+		//PowerUp Collision
+		PowerUp.interaction();
+		
+		//Enemies Collision 
 		Enemies.intersection();
 
-			//Start patrolling
+		//Enemies Starts Patrolling
 		if (enemyStartos)
 		{
 			for (Enemies dra: enemyList)
@@ -180,10 +180,6 @@ public class GameState extends BasicGameState {
 		}
 	
 		
-		/*for (int i = enemyList.size()-1; i>= 0; i--)
-						enemyheadQ = true;
-						enemyList.remove(i); }*/ 
-	
 		
 		//Enemy borders
 		for (Enemies drago: enemyList)
@@ -236,11 +232,22 @@ public class GameState extends BasicGameState {
 		for(Enemies dragon: enemyList ) // selecting list items with for loop method 1
 		{
 			enemyTexList.get(enemyList.indexOf(dragon)).draw(dragon.x, dragon.y);
-		}	
+		}
 		
+		//Draw PowerUps
+		for (Rectangle rec : powerUpList) {
+			powerUpTexList.get(powerUpList.indexOf(rec)).draw(rec.getX(),rec.getY());
+		}
+		if (poweredUp)
+		{
+			mario.draw(Mario.x-16, Mario.y-16, 48, 48);
+		}
+		
+		//GUI
 		g.setColor(Color.black);
 		g.drawString("Coins: " + coinCollection, 15, 60);
 		g.drawString("Enemy HP: " + HP, 15, 30);
+		g.drawString("Powered UP?: " + poweredUp, 15, 90);
 
 	
 		//for (int i = 1; i < enemyList.size(); i++) Selecting list with for loop method 2

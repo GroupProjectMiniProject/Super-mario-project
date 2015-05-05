@@ -12,4 +12,5 @@ public class Coins extends GameState {
 		System.out.println("COIN DRAWN");
 	}
 	
+
 }
