@@ -59,27 +59,24 @@ public class Enemies extends GameState {
 			for(Enemies dragonas: enemyList ){
 	
 			dragonas.BoundingBoxNull = new Rectangle(dragonas.x, dragonas.y, enemyDragonTex.getWidth(), enemyDragonTex.getHeight());
+			
+			//Lower body enemy boundingbox
 			dragonas.BoundingBoxPurple = new Rectangle(dragonas.x+3, dragonas.y+12, enemyDragonTex.getWidth()-4, enemyDragonTex.getHeight()/2);
+			//Upper body enemy boundingbox
 			dragonas.BoundingBoxRed = new Rectangle(dragonas.x+3, dragonas.y, enemyDragonTex.getWidth()-7, enemyDragonTex.getHeight()/3);
 			ePolices.add(new Rectangle(dragonas.BoundingBoxNull.getX()+3, dragonas.BoundingBoxNull.getY()+18, enemyDragonTex.getWidth()-4, enemyDragonTex.getHeight()/2));
 			RedPolices.add(new Rectangle(dragonas.BoundingBoxNull.getX()+3, dragonas.BoundingBoxNull.getY(), enemyDragonTex.getWidth()-7, enemyDragonTex.getHeight()/3));
 
 			}	
 			
-			//Killing that shit Mario. (Purple)
+			//Enemy-mario interaction.
 			
-			for(Enemies dragonas: enemyList ){				
-				//Enemy points which are slight smaller than bounding box
-				
-			}
 				for (int i = enemyList.size()-1; i>= 0; i--){
 				Rectangle e = enemyList.get(i).BoundingBoxPurple;
 				Rectangle d = enemyList.get(i).BoundingBoxRed;
 
 				//if (marioShape.intersects(d))
 						//enemyList.remove(i); 
-
-
 			
 				
 				arr2[0].setX(marioShape.getMinX()+1);
@@ -91,17 +88,17 @@ public class Enemies extends GameState {
 				arr2[3].setX(marioShape.getMaxX()-1);
 				arr2[3].setY(marioShape.getMaxY()-1);
 				
-				if (d.contains(arr2[2].getMinX(), arr2[2].getMinY())||d.contains(arr2[3].getMinX(), arr2[3].getMinY())){
-					enemyList.remove(i); 
 				
-					
+				//killing enemy, boundingbox red
+				if (d.contains(arr2[2].getMinX(), arr2[2].getMinY())||d.contains(arr2[3].getMinX(), arr2[3].getMinY())){
+					enemyList.remove(i); 	
 				} 
 			
+				//killing mario, boundingbox purple
 				if (marioShape.intersects(e)){
 					killMario = true; 
 					HP--;
 					enemyList.remove(i); 
-
 				}
 
 
