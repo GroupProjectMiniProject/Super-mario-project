@@ -10,12 +10,28 @@ public class IntersectionCoin extends GameState {
 	
 	public static void start (){
 		
-		Cpolices.clear();
+		//Cpolices.clear();
 		//System.out.println("------------Frame-------------");
 		//System.out.println("");
 		//System.out.println("------------Outter------------");
-		collision = false;
+		//collision = false;
 		
+		for (Rectangle coins : coinsShapes)
+		{
+			if (marioShape.intersects(coins))
+			coinCollection++;
+
+		}
+		
+		for (int i = coinsShapes.size()-1; i>= 0; i--){
+			Rectangle rec =  coinsShapes.get(i);
+
+			if (marioShape.intersects(rec)){
+				coinsShapes.remove(i);
+			}
+
+		}
+		/*
 		for (Rectangle rec : coinsShapes){
 			if (marioShape.intersects(rec)){
 				
@@ -130,11 +146,11 @@ public class IntersectionCoin extends GameState {
 					//Mario.speedX = 0;
 					System.out.println("left");
 				}
-				*/
+				
 				//System.out.println("----------------");
 				
 			}
-		}
+		}*/
 		//if (!collision){
 		//System.out.println("Outter: No Collisions");
 			

@@ -134,14 +134,15 @@ public class Intersection extends GameState {
 					//System.out.println("left");
 				}
 				//System.out.println("----------------");
-				
+				if (!collision){
+					//System.out.println("Outter: No Collisions");
+					
+					fall = true;
+				}	
 			}
 		}
-		if (!collision){
-			//System.out.println("Outter: No Collisions");
-			
-			fall = true;
-		}
+		
+	
 		for (Rectangle rec : platformsShapes){
 
 			for (Enemies dragons: enemyList)
@@ -166,7 +167,7 @@ public class Intersection extends GameState {
 				
 				botE = topE = leftE = rightE = false;  //think i need parameters for top left right and bot
 				
-				//bot right corner 
+			//bot right corner 
 				if (rec.contains(enemyArray[3].getX()+1, enemyArray[3].getY())){
 					if (rec.contains(enemyArray[1].getX(), enemyArray[1].getY())) 
 						rightE = true;
@@ -203,7 +204,7 @@ public class Intersection extends GameState {
 							leftE = true;
 						}
 					}	
-				//top right corner
+						//top right corner
 				} else if (rec.contains(enemyArray[1].getX(), enemyArray[1].getY())){
 					if (rec.contains(enemyArray[0].getX(), enemyArray[0].getY())) 
 						topE = true;
@@ -218,7 +219,8 @@ public class Intersection extends GameState {
 						}
 					}
 				//top left corner
-				} else if (rec.contains(enemyArray[0].getX(), enemyArray[0].getY())){
+					
+					} else if (rec.contains(enemyArray[0].getX(), enemyArray[0].getY())){
 					x = Math.abs(enemyArray[0].getX()-rec.getMinX());
 					y = Math.abs(enemyArray[0].getY()-rec.getMaxY());
 					if (x>y || y==19) topE = true; 
@@ -226,27 +228,31 @@ public class Intersection extends GameState {
 					else {
 						topE = true;
 						leftE = true;
-					}
-				}
+					}				
+
+				}			
+
 				
 				
 				
 				if (topE){
 					
-					eFall = true;
 					//System.out.println("top");
 				}
 				if (botE){
 					e.y = (int)(rec.getMinY()-c.getHeight());
 					//c.setY(e.y);
+					e.falling = false;
+
 					e.speedY = 0;
+					
 					//e.speedX = -1.0f;
 					//allowed = true;				
 						/*e.speedX = -1.0f;
 						if (e.x == e.overX) // idea: add parameters enemies so they have a fixed max and min movement
 							e.speedX = -1.0f;
 						if (e.x == e.belowX)
-							e.speedX = 1.0f; */
+							e.speedX = 1.0f; 
 					
 				
 					System.out.println("bot");
@@ -266,15 +272,15 @@ public class Intersection extends GameState {
 					e.speedX = 0;
 					System.out.println("left");
 				}
-				*/
 			
+						*/
+
 				//System.out.println("----------------");
 			}
-			
 	
-		
 			}
 		}
+		
 		
 		for (Enemies dragons: enemyList) {
 		
@@ -286,6 +292,7 @@ public class Intersection extends GameState {
 		}
 		}
 		
+		
 		for (Enemies dragons: enemyList){
 		
 		if (dragons.falling) {
@@ -295,10 +302,10 @@ public class Intersection extends GameState {
 			dragons.speedY *= gravity; 
 		//eFall = false;
 		}
-	}
+		}
 		
 			
 	}
 	
-
+	}
 }

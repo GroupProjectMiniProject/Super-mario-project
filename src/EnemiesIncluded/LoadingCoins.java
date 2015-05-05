@@ -9,9 +9,9 @@ public class LoadingCoins extends GameState {
 	}
 	
 	public static void start(){
-		for (int i=0; i<X; i+=texSize){
+		for (int i=0; i<10; i+=texSize){
 			coin.add(money);
-			coinsShapes.add(new Rectangle(i, bottom, texSize, texSize));
+			coinsShapes.add(new Rectangle(300, 300, texSize, texSize));
 		}
 		
 		coin.add(money);

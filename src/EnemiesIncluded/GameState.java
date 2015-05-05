@@ -34,32 +34,35 @@ public class GameState extends BasicGameState {
 	public static ArrayList<Image> coin = new ArrayList<Image>();
 	public static ArrayList<Rectangle> coinsShapes = new ArrayList<Rectangle>(), Cpolices = new ArrayList<Rectangle>();
 	public static Point[] arr3 = new Point[4];
+	public static int coinCollection = 0; 
+	public static Image money;
+	public static boolean collision = false, fall = false, start = true, jump = false, allowed = true, left = false, right = false, top = false, bot = false, enemyheadQ = false;
+	public static boolean leftE = false, rightE = false, botE = false, topE = false;
+	public static Character Mario = new Character();
+	public static Coins Money = new Coins();
 	
 	//Enemies 
 	public static ArrayList<Enemies> enemyList = new ArrayList<Enemies>();
 	public static ArrayList<Image> enemyTexList = new ArrayList<Image>();
 	public static ArrayList<Rectangle> ePolices = new ArrayList<Rectangle>();
 	public static ArrayList<Rectangle> RedPolices = new ArrayList<Rectangle>();
-
 	public static ArrayList<Rectangle> enemyRecList = new ArrayList<Rectangle>();
 	public static Image enemyDragonTex;
-	public static boolean collider = false; 
 	public static boolean enemyStartos = false;
 	public static boolean killMario = false;
 	public static boolean killEnemy = false;
-
-	public static int HP = 10; 
 	public static boolean eCollision = false;
-	public static boolean eFall = true;
+	public static boolean eFall = false;
 	public static Point[] enemyArray = new Point[4];
-	public static Point[] arrRed = new Point[4];
-	public static Point[] arrPur = new Point[4];
 
-
-
-	public static Point[] arr2 = new Point[4];
+// Platforms
 	public static ArrayList<Image> platforms = new ArrayList<Image>();
 	public static ArrayList<Rectangle> platformsShapes = new ArrayList<Rectangle>(), polices = new ArrayList<Rectangle>();
+
+	// PowerUps
+// Mario
+	public static int HP = 3; 
+	public static Point[] arr2 = new Point[4];
 	public static int X = 800, Y = 600, jumpSpeed = 20, fallSpeed = 10 , texSize = 32, bottom = Y-texSize; 
 	public static float x = 0, y = 0;
 	public static float gravity = 1.3f, acc = 1.4f;
@@ -67,14 +70,7 @@ public class GameState extends BasicGameState {
 	public static Image mario;
 	public static Image background;
 	public static Image platform_basic;
-	//COINS
-	public static Image money;
-	public static boolean collision = false, fall = false, start = true, jump = false, allowed = true, left = false, right = false, top = false, bot = false, enemyheadQ = false;
-	public static boolean leftE = false, rightE = false, botE = false, topE = false;
-	public static Character Mario = new Character();
-	//COINS
-	public static Coins Money = new Coins();
-	public static Image Dragon;
+	
 
 		
 	public void init(GameContainer container, StateBasedGame sbg)
@@ -113,11 +109,16 @@ public class GameState extends BasicGameState {
 		
 		
 		//Assigning arrays
+			//Mario
 		for(int i = 0; i < arr2.length; i++) {
 		    arr2[i] = new Point(0, 0);
 		}
+			//Enemy
+		for(int i = 0; i < enemyArray.length; i++) {
+		    enemyArray[i] = new Point(0, 0);
+		}
 		
-		//coins
+			//Coins
 		for(int i = 0; i < arr2.length; i++) {
 		    arr3[i] = new Point(0, 0);
 		}
@@ -237,9 +238,9 @@ public class GameState extends BasicGameState {
 			enemyTexList.get(enemyList.indexOf(dragon)).draw(dragon.x, dragon.y);
 		}	
 		
-		g.setColor(Color.white);
-		g.drawString("Mario HP: " + HP, 15, 60);
-		g.drawString("Enemy adawjhjjdDead: " + enemyheadQ, 15, 30);
+		g.setColor(Color.black);
+		g.drawString("Coins: " + coinCollection, 15, 60);
+		g.drawString("Enemy HP: " + HP, 15, 30);
 
 	
 		//for (int i = 1; i < enemyList.size(); i++) Selecting list with for loop method 2
