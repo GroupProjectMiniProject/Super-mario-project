@@ -22,7 +22,7 @@ public class LoadingPlatforms extends GameState {
 		platformsShapes.add(new Rectangle (200-2*texSize, 400+2*texSize, texSize, texSize));
 		platforms.add(platform_basic);
 		
-		platformsShapes.add(new Rectangle (200-3*texSize, 400+3*texSize, 4*texSize, texSize));
+		platformsShapes.add(new Rectangle (200-3*texSize, 400+3*texSize, texSize, texSize));
 		
 		platforms.add(platform_basic);
 		platformsShapes.add(new Rectangle (X-texSize*4, bottom-4*texSize, texSize, texSize));
