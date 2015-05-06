@@ -89,7 +89,7 @@ public class Intersection extends GameState {
 					}
 				//top left corner
 				} else if (rec.contains(arr2[0].getX(), arr2[0].getY())){
-					x = Math.abs(arr2[0].getX()-rec.getMinX());
+					x = Math.abs(arr2[0].getX()-rec.getMaxX());
 					y = Math.abs(arr2[0].getY()-rec.getMaxY());
 					if (x>y || y==19) top = true; 
 					else if (x<y) left = true;
