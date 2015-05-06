@@ -9,7 +9,7 @@ public class Enemies extends GameState {
 	
 	public Rectangle BoundingBoxNull;
 	public Rectangle BoundingBoxRed;
-	public Rectangle BoundingBoxPurple;
+	public Rectangle BoundingBoxPurple;//lolollol
 
 	public int x;
 	public int y;
