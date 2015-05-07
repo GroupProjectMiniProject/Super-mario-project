@@ -7,16 +7,24 @@ import java.util.ArrayList;
 
 
 
+
+
+
+
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 
 
@@ -31,9 +39,9 @@ import org.newdawn.slick.state.StateBasedGame;
 public class GameState extends BasicGameState {
 	
 	//Coins
-	public static ArrayList<Image> coin = new ArrayList<Image>();
+	//public static ArrayList<Image> coin = new ArrayList<Image>();
 	public static ArrayList<Rectangle> coinsShapes = new ArrayList<Rectangle>(), Cpolices = new ArrayList<Rectangle>();
-	public static Point[] arr3 = new Point[4];
+	//public static Point[] arr3 = new Point[4];
 	public static int coinCollection = 0; 
 	public static Image money;
 	public static boolean collision = false, fall = false, start = true, jump = false, allowed = true, left = false, right = false, top = false, bot = false, enemyheadQ = false;
@@ -41,26 +49,31 @@ public class GameState extends BasicGameState {
 	public static Character Mario = new Character();
 	public static Coins Money = new Coins();
 	
+	//NEW CHANGE
+	public static boolean outterCollision = false, innerCollision = false;
+	
 	//Enemies 
 	public static ArrayList<Enemies> enemyList = new ArrayList<Enemies>();
-	public static ArrayList<Image> enemyTexList = new ArrayList<Image>();
+	//public static ArrayList<Image> enemyTexList = new ArrayList<Image>();
 	public static ArrayList<Rectangle> ePolices = new ArrayList<Rectangle>();
 	public static ArrayList<Rectangle> RedPolices = new ArrayList<Rectangle>();
 	public static ArrayList<Rectangle> enemyRecList = new ArrayList<Rectangle>();
-	public static Image enemyDragonTex;
+	//public static Image enemyDragonTex;
 	public static boolean enemyStartos = false;
 	public static boolean killMario = false;
-	public static boolean killEnemy = false;
+	//public static boolean killEnemy = false;
 	public static boolean eCollision = false;
-	public static boolean eFall = false;
-	public static Point[] enemyArray = new Point[4];
+	public static boolean keyLeft = false, keyRight = false, eFall = false;
+	public static SpriteSheet enemySheetLeft, enemySheetRight;
+	public static Animation enemyWalkLeft, enemyWalkRight;
+	//public static Point[] enemyArray = new Point[4];
 
 	//Platforms
 	public static ArrayList<Image> platforms = new ArrayList<Image>();
 	public static ArrayList<Rectangle> platformsShapes = new ArrayList<Rectangle>(), polices = new ArrayList<Rectangle>();
 
 	//PowerUps
-	public static ArrayList<Image> powerUpTexList = new ArrayList<Image>();
+	//public static ArrayList<Image> powerUpTexList = new ArrayList<Image>();
 	public static Image powerUpTex;
 	public static ArrayList<Rectangle> powerUpList = new ArrayList<Rectangle>();
 	public static boolean poweredUp = false; 
@@ -74,9 +87,14 @@ public class GameState extends BasicGameState {
 	public static float gravity = 1.3f, acc = 1.4f;
 	public static Rectangle marioShape;
 	public static Image mario;
+	public static Image flag;
+	public static Rectangle flagShape;
+	public static Boolean finish = false;
 	public static Image background;
 	public static Image platform_basic;
-	public static Image marioPowUp;
+	public static SpriteSheet MarioSheetLeft, MarioSheetRight;
+	public static Animation MarioWalkLeft, MarioWalkRight;
+	//public static Image marioPowUp;
 	
 
 		
@@ -87,9 +105,19 @@ public class GameState extends BasicGameState {
 		background = new Image ("data/Background_Basic.bmp");
 		platform_basic = new Image ("data/Platform_Basic.bmp");
 		money = new Image("data/mariobroscoin.png");
-		enemyDragonTex = new Image ("data/drage3.png");
+		//enemyDragonTex = new Image ("data/drage3.png");
 		powerUpTex = new Image("data/mush.png");
-		marioPowUp = new Image ( "data/marioBig.png");
+		//marioPowUp = new Image ( "data/marioBig.png");
+		MarioSheetRight = new SpriteSheet ("data/MarioSheet.png", 32, 32);
+		MarioSheetLeft = new SpriteSheet (MarioSheetRight.getFlippedCopy(true, false), 32, 32);
+		MarioWalkLeft = new Animation (MarioSheetLeft, 200);
+		MarioWalkRight = new Animation (MarioSheetRight, 200);
+		enemySheetLeft = new SpriteSheet ("data/enemySprites.png");
+		enemySheetRight = new SpriteSheet (enemySheetLeft.getFlippedCopy(true, false), texSize, texSize);
+		enemyWalkLeft = new Animation (enemySheetLeft, 200);
+		enemyWalkRight = new Animation (enemySheetRight, 200);
+		
+		flag = new Image ("data/flag.png");
 		
 		System.out.println("Textures Loaded!");
 		
@@ -102,8 +130,8 @@ public class GameState extends BasicGameState {
 		System.out.println("Platforms Loaded!");
 		//System.out.println("Enemy loaded");
 
-		//Loading Enemies
-		new Enemies(0, 0, 0, 0, 0, 0, null, null, null, false).start();
+		//Loading Enemies - ??
+		new Enemies(0, 0, 0, 0, 0, 0, null, null, null, null, false).start();
 		System.out.println("Enemies Loaded");
 		
 		//Loading PowerUPs
@@ -115,13 +143,13 @@ public class GameState extends BasicGameState {
 		    arr2[i] = new Point(0, 0);
 		}
 			//Enemy
-		for(int i = 0; i < enemyArray.length; i++) {
+		/*for(int i = 0; i < enemyArray.length; i++) {
 		    enemyArray[i] = new Point(0, 0);
 		}
 			//Coins
 		for(int i = 0; i < arr2.length; i++) {
 		    arr3[i] = new Point(0, 0);
-		}
+		}*/
 		
 			
 	}
@@ -137,12 +165,32 @@ public class GameState extends BasicGameState {
 			Mario.load();
 			enemyStartos = true;
 			marioShape = new Rectangle (Mario.x, Mario.y, mario.getWidth(), mario.getHeight());
-			start = false;			
+			new Enemies(0, 0, 0, 0, 0, 0, null, null, null, null, false).start();
+			LoadingCoins.start();
+			start = false;		
+			finish = false;
 		}
 	
 		
 		//KeyPressed
 		KeyPressed.start(input, sbg);
+		
+		//Animation Update
+		System.out.println("Keys: left/right = " + keyLeft + "/" + keyRight);
+		if (keyLeft) {
+			MarioWalkLeft.start();
+			MarioWalkLeft.update(delta);
+		}
+		else if (keyRight) {
+			MarioWalkRight.start();
+			MarioWalkRight.update(delta);
+		}
+		else {
+			MarioWalkLeft.restart();
+			MarioWalkLeft.stop();
+			MarioWalkRight.restart();
+			MarioWalkRight.stop();
+		}
 		
 		//Borders and final position
 		Mario.x += (int)Mario.speedX; 
@@ -205,8 +253,15 @@ public class GameState extends BasicGameState {
 		//Mario and Enemy collisions with platforms
 		Intersection.start();
 		
+		//Finish
+		if (finish) {
+			finish = false;
+			start = true;
+			sbg.enterState(2, new FadeOutTransition(), new FadeInTransition());
+		}
+		
         //Coins Loading
-		IntersectionCoin.start();
+		//IntersectionCoin.start();
 	}
 
 	public void render(GameContainer container, StateBasedGame sbg, Graphics g)
@@ -220,7 +275,8 @@ public class GameState extends BasicGameState {
 
 		//Draw coins
 		for (Rectangle rec : coinsShapes) {
-			coin.get(coinsShapes.indexOf(rec)).draw(rec.getX(),rec.getY());
+			//coin.get(coinsShapes.indexOf(rec)).draw(rec.getX(),rec.getY());
+			money.draw(rec.getX(), rec.getY());
 		}
 		
 		//Draw platforms
@@ -228,19 +284,34 @@ public class GameState extends BasicGameState {
 			platforms.get(platformsShapes.indexOf(rec)).draw(rec.getX(), rec.getY());
 		}
 		
+		//Draw flag
+		flag.draw(flagShape.getMinX(), flagShape.getMinY(), flagShape.getWidth(), flagShape.getHeight());
+		
 		//Draw Enemies  
 		for(Enemies dragon: enemyList ) // selecting list items with for loop method 1
 		{
-			enemyTexList.get(enemyList.indexOf(dragon)).draw(dragon.x, dragon.y);
+			//enemyTexList.get(enemyList.indexOf(dragon)).draw(dragon.x, dragon.y);
+			if (dragon.speedX < 0) enemyWalkLeft.draw(dragon.x, dragon.y);
+			else enemyWalkRight.draw(dragon.x, dragon.y);
 		}
 		
 		//Draw PowerUps
 		for (Rectangle rec : powerUpList) {
-			powerUpTexList.get(powerUpList.indexOf(rec)).draw(rec.getX(),rec.getY());
+			//powerUpTexList.get(powerUpList.indexOf(rec)).draw(rec.getX(),rec.getY());
+			powerUpTex.draw(rec.getX(), rec.getY());
 		}
-		if (poweredUp)
-		{
-			mario.draw(Mario.x-16, Mario.y-16, 48, 48);
+		
+		//Mario visuals drawing
+		if (poweredUp){
+			killMario = false;
+			if (!keyRight && !keyLeft) mario.draw(Mario.x, Mario.y, Color.green);
+			else if (keyLeft) MarioWalkLeft.draw(Mario.x, Mario.y, Color.green);
+			else if (keyRight) MarioWalkRight.draw(Mario.x, Mario.y, Color.green);
+		}	
+		else {
+			if (!keyRight && !keyLeft) mario.draw(Mario.x, Mario.y);
+			else if (keyLeft) MarioWalkLeft.draw(Mario.x, Mario.y);
+			else if (keyRight) MarioWalkRight.draw(Mario.x, Mario.y);
 		}
 		
 		//GUI
@@ -248,18 +319,7 @@ public class GameState extends BasicGameState {
 		g.drawString("Coins: " + coinCollection, 15, 60);
 		g.drawString("Enemy HP: " + HP, 15, 30);
 		g.drawString("Powered UP?: " + poweredUp, 15, 90);
-
-	
-		//for (int i = 1; i < enemyList.size(); i++) Selecting list with for loop method 2
-		//{
-		//	enemyList.get(i).draw(enemyTexList.get(i));	
-		//}
-		//enemyList.get(0).draw(enemyTexList.get(0)); Selecting list items 
-		//enemyList.get(1).draw(enemyTexList.get(1));
-		//enemyList.get(2).draw(enemyTexList.get(2));
-		
-
-
+		g.drawString("killMario?: " + killMario, 15, 120);
 
 		//Interaction notifiers
 		g.setColor(Color.red);
@@ -270,24 +330,14 @@ public class GameState extends BasicGameState {
 		for (Rectangle r : Cpolices){
 			g.draw(r);
 		}
-		/*for (Rectangle r: RedPolices){
-			g.draw(r);
-		}
-		g.setColor(Color.magenta);
-
-		for (Rectangle r: ePolices){
-			g.draw(r);
-		}*/
 			
-		 Mario.draw(mario);
+		 //Mario.draw(mario);
 
 		//Draw Mario
-		if (killMario)
-			mario.drawFlash(Mario.x, Mario.y);
-		for (Enemies dragons: enemyList)
-		if (killEnemy)
-			enemyDragonTex.drawFlash(dragons.x, dragons.y);
-
+		if (killMario){
+			System.out.println("Dead");
+			mario.draw(Mario.x, Mario.y, 1.0f, Color.red);
+		}	
 		//coins
 		//Money.draw(money);
 	}
