@@ -6,12 +6,46 @@ public class LoadingPlatforms extends GameState {
 	public LoadingPlatforms (){
 	}
 	public static void start(){
+		
+		//bottom ground
 		for (int i=0; i<X; i+=texSize){
 			platforms.add(platform_basic);
 			platformsShapes.add(new Rectangle(i, bottom, texSize, texSize));
 		}
 		
-		flagShape = new Rectangle(X-texSize, bottom-texSize, texSize, texSize);
+		//middle ground
+		for (int i=0; i<200; i+=texSize){
+			platforms.add(platform_basic);
+			platformsShapes.add(new Rectangle(i, 300, texSize, texSize));
+		}
+		
+		//middle ground
+		for (int i=0; i<150; i+=texSize){
+		platforms.add(platform_basic);
+		platformsShapes.add(new Rectangle (X-i, bottom-4*texSize, texSize, texSize));
+		}
+		
+		//top ground
+		for (int i=0; i<600; i+=texSize){
+		platforms.add(platform_basic);
+		platformsShapes.add(new Rectangle (i+texSize*6, texSize*3, texSize, texSize));
+		}
+		
+		//top boundary
+		for (int i=0; i<650; i+=texSize){
+		platforms.add(platform_basic);
+		platformsShapes.add(new Rectangle (i+texSize*4, -texSize, texSize, texSize));
+		}
+		
+		//position of flag/end
+		flagShape = new Rectangle(X-texSize, texSize*2, texSize, texSize);
+		
+		
+		platforms.add(platform_basic);
+		platformsShapes.add(new Rectangle (texSize*8, texSize*2, texSize, texSize));
+		
+		platforms.add(platform_basic);
+		platformsShapes.add(new Rectangle (texSize*8, -5, texSize, texSize));
 		
 		platforms.add(platform_basic);
 		platformsShapes.add(new Rectangle (400, 400, texSize, texSize));
@@ -46,16 +80,6 @@ public class LoadingPlatforms extends GameState {
 		platforms.add(platform_basic);
 		platformsShapes.add(new Rectangle (texSize*6, 300-texSize, texSize, texSize));
 		
-		for (int i=0; i<150; i+=texSize){
-		platforms.add(platform_basic);
-		platformsShapes.add(new Rectangle (X-i, bottom-4*texSize, texSize, texSize));
-		}
-		
-		for (int i=0; i<200; i+=texSize){
-			platforms.add(platform_basic);
-			platformsShapes.add(new Rectangle(i, 300, texSize, texSize));
-		}
-		
 		platforms.add(platform_basic);
 		platformsShapes.add(new Rectangle (200, 400, texSize, texSize));
 		
@@ -72,7 +96,7 @@ public class LoadingPlatforms extends GameState {
 		platformsShapes.add(new Rectangle (0, bottom-2*texSize, texSize, texSize));
 		
 		platforms.add(platform_basic);
-		platformsShapes.add(new Rectangle (200, texSize*4, texSize, texSize));
+		platformsShapes.add(new Rectangle (texSize*5, texSize*4, texSize, texSize));
 		
 		int count = 0;
 		for (Rectangle rec : platformsShapes){
