@@ -59,13 +59,13 @@ public class Enemies extends GameState {
 		enemyList.clear();
 		
 		
-		enemyList.add(new Enemies(2*texSize, bottom-10*texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false, bot, top, right, left)); //Change
+		enemyList.add(new Enemies(2*texSize, bottom-11*texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false, false, false, false, false)); //Change
 		System.out.printf("Enemy loaded \n");
 		
-		enemyList.add(new Enemies(texSize, bottom-texSize-10, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, bot, top, right, left, false)); //Change
+		enemyList.add(new Enemies(texSize, bottom-texSize-10, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false, false, false, false, false)); //Change
 		System.out.printf("Enemy loaded \n");
 		
-		enemyList.add(new Enemies(Y-4*texSize, bottom-5*texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, bot, top, right, left, false)); //Change
+		enemyList.add(new Enemies(Y-4*texSize, bottom-5*texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false, false, false, false, false)); //Change
 		System.out.printf("Enemy loaded \n");
 		
 		
@@ -106,7 +106,7 @@ public class Enemies extends GameState {
 				
 				
 				//killing enemy, boundingbox red
-				if (d.contains(arr2[2].getMinX(), arr2[2].getMinY())||d.contains(arr2[3].getMinX(), arr2[3].getMinY())){
+				if (marioShape.intersects(d)){
 					enemyList.remove(i); 	
 				} 
 			
