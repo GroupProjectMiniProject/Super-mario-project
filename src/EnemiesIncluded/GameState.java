@@ -105,7 +105,7 @@ public class GameState extends BasicGameState {
 		background = new Image ("data/Background_Basic.bmp");
 		platform_basic = new Image ("data/Platform_Basic.bmp");
 		money = new Image("data/mariobroscoin.png");
-		//enemyDragonTex = new Image ("data/drage3.png");
+		enemyDragonTex = new Image ("data/drage3.png");
 		powerUpTex = new Image("data/mush.png");
 		//marioPowUp = new Image ( "data/marioBig.png");
 		MarioSheetRight = new SpriteSheet ("data/MarioSheet.png", 32, 32);

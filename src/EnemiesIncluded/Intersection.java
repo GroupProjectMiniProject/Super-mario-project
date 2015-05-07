@@ -134,13 +134,14 @@ public class Intersection extends GameState {
 					//System.out.println("left");
 				}
 				//System.out.println("----------------");
-				if (!collision){
-					//System.out.println("Outter: No Collisions");
-					
-					fall = true;
-				}	
+				
 			}
 		}
+		if (!collision){
+			//System.out.println("Outter: No Collisions");
+			
+			fall = true;
+		}	
 		
 	//****************************************************************************// Change
 		//Enemy Intersections with platform
