@@ -158,91 +158,96 @@ public class Intersection extends GameState {
 				Rectangle o = dragons.enemyOuterShape;
 				Rectangle i = dragons.enemyInnerShape;
 				Enemies e = dragons;
+				boolean b = dragons.bot; 
+				boolean t = dragons.top; 
+				boolean r = dragons.right; 
+				boolean l = dragons.left; 
+
 				
 				if (o.intersects(rec))
 					outerCollision = true;
 				if (i.intersects(rec)){
 					
 					innerCollision = true;
-					botE = topE = leftE = rightE = false; 
+					b = t = l = r = false; 
 					x = y = 0; 
 				
 				//Bot Right Corner
 				if (rec.contains(i.getMaxX(), i.getMaxY())){
 					if (rec.contains(i.getMaxX(), i.getMinX()))
-						rightE = true;
+						r = true;
 					else if (rec.contains(i.getMinX(), i.getMaxY()))
-						botE = true; 
+						b = true; 
 					
 				} else {
 					x = Math.abs(i.getMaxX()-rec.getMinX());
 					y = Math.abs(i.getMaxY()-rec.getMinY());
-					if (x>y) botE = true; 
-					else if (x<y) rightE = true; 
+					if (x>y) b = true; 
+					else if (x<y) r = true; 
 					else {
-						botE = true; 
-						rightE = true; 
+						b = true; 
+						r = true; 
 					}					
 				}
 				
 				//Bot Left Corner
 				} else if (rec.contains(i.getMinX(), i.getMaxY())){
 					if (rec.contains(i.getMinX(), i.getMinY()))
-						leftE = true;
+						l = true;
 					else {
 						x = Math.abs(i.getMinX()-rec.getMaxX());
 						y = Math.abs( i.getMaxY()-rec.getMinY());
 						if (x>y) {
-							botE = true;
+							b = true;
 						}
-						else if (x<y) leftE = true;
+						else if (x<y) l = true;
 						else {
-							botE = true;
-							leftE = true;
+							b = true;
+							l = true;
 						}
 					}
 					//Top Right Corner
 				} else if (rec.contains(i.getMaxX(), i.getMinY())){
 					if (rec.contains(i.getMinX(), i.getMinY())) 
-						topE = true;
+						t = true;
 					else {
 						x = Math.abs(i.getMaxX()-rec.getMinX());
 						y = Math.abs(i.getMinY()-rec.getMaxY());
-						if (x>y || y==19) topE = true; 
-						else if (x<y) rightE = true;
+						if (x>y || y==19) t = true; 
+						else if (x<y) r = true;
 						else {
-							topE = true;
-							rightE = true;
+							t = true;
+							r = true;
 						}
 					}
 					//Top Left Corner
 				} else if (rec.contains(i.getMinX(), i.getMinY())){
 					x = Math.abs(i.getMinX()-rec.getMaxX());
 					y = Math.abs(i.getMinY()-rec.getMaxY());
-					if (x>y || y==19) topE = true; 
-					else if (x<y) leftE = true;
+					if (x>y || y==19) t = true; 
+					else if (x<y) l = true;
 					else {
-						topE = true;
-						leftE = true;
+						t = true;
+						l = true;
 					}
 				}
 				
-				if (topE){
+				if (t){
 					e.y = (int)(rec.getMaxY());
 					e.falling = true;
 					e.speedY = 0;
 				}
-				if (botE){
+				if (b){
 					e.y = (int)(rec.getMinY()-o.getHeight());
 					e.speedY = 0;
 					e.falling = false;
 				}
 				
-				if (rightE){
+				if (r){
 					e.x = (int)(rec.getMinX()-o.getWidth());
 					e.speedX = -1.0f;
 				}
-				if (leftE){
+				if (l){
 					e.x = (int)rec.getMaxX();
 					e.speedX = 1.0f;
 				}

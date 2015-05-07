@@ -131,7 +131,7 @@ public class GameState extends BasicGameState {
 		//System.out.println("Enemy loaded");
 
 		//Loading Enemies - ??
-		new Enemies(0, 0, 0, 0, 0, 0, null, null, null, null, false).start();
+		new Enemies(0, 0, 0, 0, 0, 0, null, null, null, null, false, false, false, false, false).start();
 		System.out.println("Enemies Loaded");
 		
 		//Loading PowerUPs
@@ -165,7 +165,7 @@ public class GameState extends BasicGameState {
 			Mario.load();
 			enemyStartos = true;
 			marioShape = new Rectangle (Mario.x, Mario.y, mario.getWidth(), mario.getHeight());
-			new Enemies(0, 0, 0, 0, 0, 0, null, null, null, null, false).start();
+			new Enemies(0, 0, 0, 0, 0, 0, null, null, null, null, false, false, false, false, false).start();
 			LoadingCoins.start();
 			PowerUp.start();
 			start = false;		

@@ -15,17 +15,19 @@ public class Enemies extends GameState {
 
 	public int x;
 	public int y;
-	public int speedMax;
-	public int health;
 	public int overX;
 	public int belowX;
 	public float speedX;
 	public float speedY;
 	public boolean falling;
+	public boolean bot;
+	public boolean top;
+	public boolean right;
+	public boolean left;
 
 
 	
-	public Enemies(int xpos, int ypos, float spX, float spY, int ovrX, int blwX, Rectangle eOtS, Rectangle bndboxR, Rectangle bndboxP, Rectangle eInS, boolean falls) {
+	public Enemies(int xpos, int ypos, float spX, float spY, int ovrX, int blwX, Rectangle eOtS, Rectangle bndboxR, Rectangle bndboxP, Rectangle eInS, boolean falls, boolean bo, boolean to, boolean righ, boolean lef) {
 		
 		x = xpos;
 		y = ypos;
@@ -35,8 +37,12 @@ public class Enemies extends GameState {
 		belowX = xpos-blwX;
 		BoundingBoxRed = bndboxR;
 		BoundingBoxPurple = bndboxP;
-		enemyInnerShape = eInS;//Change
-		enemyOuterShape = eOtS;//Change
+		enemyInnerShape = eInS;
+		enemyOuterShape = eOtS;
+		bot = bo;
+		top = to; 
+		right = righ;
+		left = lef; 
 		
 
 		falling = falls;
@@ -53,13 +59,13 @@ public class Enemies extends GameState {
 		enemyList.clear();
 		
 		
-		enemyList.add(new Enemies(2*texSize, bottom-9*texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false)); //Change
+		enemyList.add(new Enemies(2*texSize, bottom-10*texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false, bot, top, right, left)); //Change
 		System.out.printf("Enemy loaded \n");
 		
-		enemyList.add(new Enemies(texSize, bottom-texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false)); //Change
+		enemyList.add(new Enemies(texSize, bottom-texSize-10, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, bot, top, right, left, false)); //Change
 		System.out.printf("Enemy loaded \n");
 		
-		enemyList.add(new Enemies(Y-4*texSize, bottom-5*texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false)); //Change
+		enemyList.add(new Enemies(Y-4*texSize, bottom-5*texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, bot, top, right, left, false)); //Change
 		System.out.printf("Enemy loaded \n");
 		
 		
