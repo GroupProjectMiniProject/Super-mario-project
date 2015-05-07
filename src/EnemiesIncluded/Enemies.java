@@ -52,11 +52,17 @@ public class Enemies extends GameState {
 		
 		enemyList.clear();
 		
-		for (int d=1; d<4; d++){
-			//enemyTexList.add(enemyDragonTex);
-			enemyList.add(new Enemies(200+d*200, 500+(d*10), 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false)); //Change
-			System.out.printf("Enemy %d loaded \n", d);
-		}	
+		
+		enemyList.add(new Enemies(2*texSize, bottom-9*texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false)); //Change
+		System.out.printf("Enemy loaded \n");
+		
+		enemyList.add(new Enemies(texSize, bottom-texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false)); //Change
+		System.out.printf("Enemy loaded \n");
+		
+		enemyList.add(new Enemies(Y-4*texSize, bottom-5*texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false)); //Change
+		System.out.printf("Enemy loaded \n");
+		
+		
 	}
 	
 	
