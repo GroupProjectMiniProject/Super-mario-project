@@ -13,8 +13,6 @@ public class LoadingPlatforms extends GameState {
 		
 		flagShape = new Rectangle(X-texSize, bottom-texSize, texSize, texSize);
 		
-		//MADE THIS
-		
 		platforms.add(platform_basic);
 		platformsShapes.add(new Rectangle (400, 400, texSize, texSize));
 		
@@ -57,8 +55,6 @@ public class LoadingPlatforms extends GameState {
 			platforms.add(platform_basic);
 			platformsShapes.add(new Rectangle(i, 300, texSize, texSize));
 		}
-		//MADE THE STUFF ABOVE
-	
 		
 		platforms.add(platform_basic);
 		platformsShapes.add(new Rectangle (200, 400, texSize, texSize));
@@ -68,12 +64,15 @@ public class LoadingPlatforms extends GameState {
 		
 		platforms.add(platform_basic);
 		platformsShapes.add(new Rectangle (200-2*texSize, 400+2*texSize, texSize, texSize));
-		platforms.add(platform_basic);
 		
+		platforms.add(platform_basic);
 		platformsShapes.add(new Rectangle (200-3*texSize, 400+3*texSize, texSize, texSize));
 		
 		platforms.add(platform_basic);
 		platformsShapes.add(new Rectangle (0, bottom-2*texSize, texSize, texSize));
+		
+		platforms.add(platform_basic);
+		platformsShapes.add(new Rectangle (200, texSize*4, texSize, texSize));
 		
 		int count = 0;
 		for (Rectangle rec : platformsShapes){
