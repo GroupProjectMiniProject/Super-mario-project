@@ -7,9 +7,11 @@ import org.newdawn.slick.geom.Rectangle;
 
 public class Enemies extends GameState {
 	
-	public Rectangle BoundingBoxNull;
 	public Rectangle BoundingBoxRed;
-	public Rectangle BoundingBoxPurple;//lolollol
+	public Rectangle BoundingBoxPurple;
+	public Rectangle enemyInnerShape;//Change
+	public Rectangle enemyOuterShape;//Change
+
 
 	public int x;
 	public int y;
@@ -23,7 +25,7 @@ public class Enemies extends GameState {
 
 
 	
-	public Enemies(int xpos, int ypos, float spX, float spY, int ovrX, int blwX, Rectangle bndbox, Rectangle bndboxR, Rectangle bndboxP, boolean falls) {
+	public Enemies(int xpos, int ypos, float spX, float spY, int ovrX, int blwX, Rectangle eOtS, Rectangle bndboxR, Rectangle bndboxP, Rectangle eInS, boolean falls) {
 		
 		x = xpos;
 		y = ypos;
@@ -31,9 +33,11 @@ public class Enemies extends GameState {
 		speedY = spY;
 		overX = ovrX+xpos;
 		belowX = xpos-blwX;
-		BoundingBoxNull = bndbox;
 		BoundingBoxRed = bndboxR;
 		BoundingBoxPurple = bndboxP;
+		enemyInnerShape = eInS;//Change
+		enemyOuterShape = eOtS;//Change
+		
 
 		falling = falls;
 	}
@@ -46,9 +50,11 @@ public class Enemies extends GameState {
 	
 	public void start() {
 		
+		enemyList.clear();
+		
 		for (int d=1; d<4; d++){
-			enemyTexList.add(enemyDragonTex);
-			enemyList.add(new Enemies(200+d*200, 500+(d*10), 0.0f, 0.0f, 50, 50, BoundingBoxNull, BoundingBoxRed, BoundingBoxPurple, false)); //I have to make the parameters linked to the X and Y coordinates??
+			//enemyTexList.add(enemyDragonTex);
+			enemyList.add(new Enemies(200+d*200, 500+(d*10), 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false)); //Change
 			System.out.printf("Enemy %d loaded \n", d);
 		}	
 	}
@@ -58,15 +64,13 @@ public class Enemies extends GameState {
 		
 			for(Enemies dragonas: enemyList ){
 	
-			dragonas.BoundingBoxNull = new Rectangle(dragonas.x, dragonas.y, enemyDragonTex.getWidth(), enemyDragonTex.getHeight());
-			
+			dragonas.enemyOuterShape = new Rectangle(dragonas.x, dragonas.y, enemyDragonTex.getWidth(), enemyDragonTex.getHeight()); //Change
+			dragonas.enemyInnerShape = new Rectangle  (dragonas.x+1, dragonas.y+1, enemyDragonTex.getWidth()-2, enemyDragonTex.getHeight()-2); //Change
 			//Lower body enemy boundingbox
 			dragonas.BoundingBoxPurple = new Rectangle(dragonas.x+3, dragonas.y+12, enemyDragonTex.getWidth()-4, enemyDragonTex.getHeight()/2);
 			//Upper body enemy boundingbox
 			dragonas.BoundingBoxRed = new Rectangle(dragonas.x+3, dragonas.y, enemyDragonTex.getWidth()-7, enemyDragonTex.getHeight()/3);
-			ePolices.add(new Rectangle(dragonas.BoundingBoxNull.getX()+3, dragonas.BoundingBoxNull.getY()+18, enemyDragonTex.getWidth()-4, enemyDragonTex.getHeight()/2));
-			RedPolices.add(new Rectangle(dragonas.BoundingBoxNull.getX()+3, dragonas.BoundingBoxNull.getY(), enemyDragonTex.getWidth()-7, enemyDragonTex.getHeight()/3));
-
+			//Change
 			}	
 			
 			//Enemy-mario interaction.

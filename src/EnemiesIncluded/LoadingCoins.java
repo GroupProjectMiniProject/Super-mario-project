@@ -9,19 +9,20 @@ public class LoadingCoins extends GameState {
 	}
 	
 	public static void start(){
-		for (int i=0; i<10; i+=texSize){
-			coin.add(money);
-			coinsShapes.add(new Rectangle(300, 300, texSize, texSize));
+		coinsShapes.clear();
+		
+		for (int i=0; i<10; i++){
+			coinsShapes.add(new Rectangle(300+(i*20), 300, texSize, texSize));
 		}
 		
-		coin.add(money);
+		/*coin.add(money);
 		coinsShapes.add(new Rectangle (X-texSize, bottom-2*texSize, texSize, texSize));
 		
 		coin.add(money);
 		coinsShapes.add(new Rectangle (X-texSize*5, bottom-3*texSize, texSize, texSize));
 		
 		coin.add(money);
-		coinsShapes.add(new Rectangle (0, bottom-3*texSize, texSize, texSize));
+		coinsShapes.add(new Rectangle (0, bottom-3*texSize, texSize, texSize));*/
 		
 		int coinCount = 0;
 		for (Rectangle rec : coinsShapes){

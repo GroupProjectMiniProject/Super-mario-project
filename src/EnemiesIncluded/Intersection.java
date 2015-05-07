@@ -142,75 +142,70 @@ public class Intersection extends GameState {
 			}
 		}
 		
+	//****************************************************************************// Change
+		//Enemy Intersections with platform
+		
+	outerCollision = false; 
+	innerCollision = false;
 	
 		for (Rectangle rec : platformsShapes){
+			
 
 			for (Enemies dragons: enemyList)
 			{
-				Rectangle c = dragons.BoundingBoxNull;
+				Rectangle o = dragons.enemyOuterShape;
+				Rectangle i = dragons.enemyInnerShape;
 				Enemies e = dragons;
 				
-			if (c.intersects(rec)){
+				if (o.intersects(rec))
+					outerCollision = true;
+				if (i.intersects(rec)){
+					
+					innerCollision = true;
+					botE = topE = leftE = rightE = false; 
+					x = y = 0; 
 				
-						
-				eCollision = true;
-				//ePolices.add(new Rectangle(rec.getMinX(), rec.getMinY(), texSize, texSize));
-				
-				enemyArray[0].setX(c.getMinX()+1);
-				enemyArray[0].setY(c.getMinY()+1);
-				enemyArray[1].setX(c.getMaxX()-1);
-				enemyArray[1].setY(c.getMinY()+1);
-				enemyArray[2].setX(c.getMinX()+1);
-				enemyArray[2].setY(c.getMaxY()-1);
-				enemyArray[3].setX(c.getMaxX()-1);
-				enemyArray[3].setY(c.getMaxY()-1);
-				
-				botE = topE = leftE = rightE = false;  //think i need parameters for top left right and bot
-				
-			//bot right corner 
-				if (rec.contains(enemyArray[3].getX()+1, enemyArray[3].getY())){
-					if (rec.contains(enemyArray[1].getX(), enemyArray[1].getY())) 
+				//Bot Right Corner
+				if (rec.contains(i.getMaxX(), i.getMaxY())){
+					if (rec.contains(i.getMaxX(), i.getMinX()))
 						rightE = true;
-					else if (rec.contains(enemyArray[2].getX(), enemyArray[2].getY())){
-						botE = true;
-						//System.out.println(Mario.speedY);
-						//System.out.println("bot right");
-					}
-						
+					else if (rec.contains(i.getMinX(), i.getMaxY()))
+						botE = true; 
+					
+				} else {
+					x = Math.abs(i.getMaxX()-rec.getMinX());
+					y = Math.abs(i.getMaxY()-rec.getMinY());
+					if (x>y) botE = true; 
+					else if (x<y) rightE = true; 
 					else {
-						x = Math.abs(enemyArray[3].getX()-rec.getMinX());
-						y = Math.abs(enemyArray[3].getY()-rec.getMinY());
-						if (x>y) botE = true; 
-						else if (x<y) rightE = true;
-						else {
-							botE = true;
-							rightE = true;
-						}
-					}
-				//bot left corner	
-				} else if (rec.contains(enemyArray[2].getX(), enemyArray[2].getY())){
-					if (rec.contains(enemyArray[0].getX(), enemyArray[0].getY()))
+						botE = true; 
+						rightE = true; 
+					}					
+				}
+				
+				//Bot Left Corner
+				} else if (rec.contains(i.getMinX(), i.getMaxY())){
+					if (rec.contains(i.getMinX(), i.getMinY()))
 						leftE = true;
 					else {
-						x = Math.abs(enemyArray[2].getX()-rec.getMaxX());
-						y = Math.abs(enemyArray[2].getY()-rec.getMinY());
+						x = Math.abs(i.getMinX()-rec.getMaxX());
+						y = Math.abs( i.getMaxY()-rec.getMinY());
 						if (x>y) {
-							botE = true; 
-							//System.out.println("bot right");
+							botE = true;
 						}
 						else if (x<y) leftE = true;
 						else {
 							botE = true;
 							leftE = true;
 						}
-					}	
-						//top right corner
-				} else if (rec.contains(enemyArray[1].getX(), enemyArray[1].getY())){
-					if (rec.contains(enemyArray[0].getX(), enemyArray[0].getY())) 
+					}
+					//Top Right Corner
+				} else if (rec.contains(i.getMaxX(), i.getMinY())){
+					if (rec.contains(i.getMinX(), i.getMinY())) 
 						topE = true;
 					else {
-						x = Math.abs(enemyArray[1].getX()-rec.getMinX());
-						y = Math.abs(enemyArray[1].getY()-rec.getMaxY());
+						x = Math.abs(i.getMaxX()-rec.getMinX());
+						y = Math.abs(i.getMinY()-rec.getMaxY());
 						if (x>y || y==19) topE = true; 
 						else if (x<y) rightE = true;
 						else {
@@ -218,79 +213,46 @@ public class Intersection extends GameState {
 							rightE = true;
 						}
 					}
-				//top left corner
-					
-					} else if (rec.contains(enemyArray[0].getX(), enemyArray[0].getY())){
-					x = Math.abs(enemyArray[0].getX()-rec.getMinX());
-					y = Math.abs(enemyArray[0].getY()-rec.getMaxY());
+					//Top Left Corner
+				} else if (rec.contains(i.getMinX(), i.getMinY())){
+					x = Math.abs(i.getMinX()-rec.getMaxX());
+					y = Math.abs(i.getMinY()-rec.getMaxY());
 					if (x>y || y==19) topE = true; 
 					else if (x<y) leftE = true;
 					else {
 						topE = true;
 						leftE = true;
-					}				
-
-				}			
-
-				
-				
+					}
+				}
 				
 				if (topE){
-					
-					//System.out.println("top");
+					e.y = (int)(rec.getMaxY());
+					e.falling = true;
+					e.speedY = 0;
 				}
 				if (botE){
-					e.y = (int)(rec.getMinY()-c.getHeight());
-					//c.setY(e.y);
-					e.falling = false;
-
+					e.y = (int)(rec.getMinY()-o.getHeight());
 					e.speedY = 0;
-					
-					//e.speedX = -1.0f;
-					//allowed = true;				
-						/*e.speedX = -1.0f;
-						if (e.x == e.overX) // idea: add parameters enemies so they have a fixed max and min movement
-							e.speedX = -1.0f;
-						if (e.x == e.belowX)
-							e.speedX = 1.0f; 
-					
-				
-					System.out.println("bot");
+					e.falling = false;
 				}
-				/* 
+				
 				if (rightE){
-					e.x = (int)(rec.getMinX()-c.getWidth());
-					c.setX(e.x);
-					e.speedX = 0;
-					System.out.println(" right");
-					
+					e.x = (int)(rec.getMinX()-o.getWidth());
+					e.speedX = -1.0f;
 				}
-				
 				if (leftE){
-					e.x = (int)c.getMaxX();
-					c.setX(e.x);	
-					e.speedX = 0;
-					System.out.println("left");
+					e.x = (int)rec.getMaxX();
+					e.speedX = 1.0f;
 				}
-			
-						*/
-
-				//System.out.println("----------------");
 			}
+			
+		}
+		for(Enemies e : enemyList){
+		if (!outerCollision && !innerCollision){
+			e.falling = true;
+		}
+		}
 	
-			}
-		}
-		
-		
-		for (Enemies dragons: enemyList) {
-		
-			
-		if (!eCollision){
-			dragons.falling = true;
-			System.out.println("loooooooooooooool");
-
-		}
-		}
 		
 		
 		for (Enemies dragons: enemyList){
@@ -301,11 +263,29 @@ public class Intersection extends GameState {
 		else if (dragons.speedY < fallSpeed)
 			dragons.speedY *= gravity; 
 		//eFall = false;
-		}
+			}
+		}	
+//Enemy Intersection END //CHANGE
+		
+		
+//********************************************************************************************************// CHANGE
+//COIN intersection START
+		for (Rectangle coins : coinsShapes)
+		{
+			if (marioShape.intersects(coins))
+			coinCollection++;
+
 		}
 		
-			
-	}
-	
+		for (int i = coinsShapes.size()-1; i>= 0; i--){
+			Rectangle rec =  coinsShapes.get(i);
+
+			if (marioShape.intersects(rec)){
+				coinsShapes.remove(i);
+			}
+
+		}//COIN intersection END 
+		
+
 	}
 }

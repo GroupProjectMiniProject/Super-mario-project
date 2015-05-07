@@ -1,11 +1,12 @@
 package EnemiesIncluded;
 
 import org.newdawn.slick.Image;
+import org.newdawn.slick.geom.Rectangle;
 
 public class Coins extends GameState {
 	
-	public static int Cx=400;
-	public static int Cy=400;
+	public int Cx;//Change
+	public int Cy;//Change
 
 	public void draw(Image image) {
 		image.draw(Cx, Cy);

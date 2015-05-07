@@ -14,8 +14,10 @@ public class PowerUp extends GameState {
 
 	public static void start (){
 		
+		powerUpList.clear(); 
+		
 		for (int i = 0; i < 2; i++){
-			powerUpTexList.add(powerUpTex);
+			//powerUpTexList.add(powerUpTex);
 			powerUpList.add(new Rectangle(200+(i*400), 550, powerUpTex.getWidth(), powerUpTex.getHeight()));
 
 			

@@ -1,4 +1,4 @@
-package EnemiesIncluded;
+/*package EnemiesIncluded;
 
 import org.newdawn.slick.geom.Rectangle;
 
@@ -26,4 +26,4 @@ public class IntersectionCoin extends GameState {
 
 		}
 	}
-}
+} */
