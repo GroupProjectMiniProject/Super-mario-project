@@ -80,7 +80,7 @@ public class GameState extends BasicGameState {
 
 	
 	//Mario
-	public static int HP = 3; 
+	public static int HP = 2; 
 	public static Point[] arr2 = new Point[4];
 	public static int X = 800, Y = 600, jumpSpeed = 20, fallSpeed = 10 , texSize = 32, bottom = Y-texSize; 
 	public static float x = 0, y = 0;
@@ -164,6 +164,9 @@ public class GameState extends BasicGameState {
 		if (start){
 			Mario.load();
 			enemyStartos = true;
+			poweredUp = false; 
+			killMario = false;
+			HP = 2;
 			marioShape = new Rectangle (Mario.x, Mario.y, mario.getWidth(), mario.getHeight());
 			new Enemies(0, 0, 0, 0, 0, 0, null, null, null, null, false, false, false, false, false).start();
 			LoadingCoins.start();
@@ -252,6 +255,9 @@ public class GameState extends BasicGameState {
 		
 		//Mario and Enemy collisions with platforms
 		Intersection.start();
+		
+		if (HP==0)
+			finish = true;
 		
 		//Finish
 		if (finish) {
