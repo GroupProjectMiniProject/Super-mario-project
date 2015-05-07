@@ -218,7 +218,6 @@ public class GameState extends BasicGameState {
 		{
 			for (Enemies dra: enemyList)
 			{
-				dra.speedMax = 5; 
 				dra.speedX = 1.0f;
 				
 				//dra.speedY = 1.0f;
