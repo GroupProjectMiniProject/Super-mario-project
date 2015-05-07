@@ -167,6 +167,7 @@ public class GameState extends BasicGameState {
 			marioShape = new Rectangle (Mario.x, Mario.y, mario.getWidth(), mario.getHeight());
 			new Enemies(0, 0, 0, 0, 0, 0, null, null, null, null, false).start();
 			LoadingCoins.start();
+			PowerUp.start();
 			start = false;		
 			finish = false;
 		}
