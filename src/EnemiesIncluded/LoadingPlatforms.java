@@ -40,9 +40,8 @@ public class LoadingPlatforms extends GameState {
 		//position of flag/end
 		flagShape = new Rectangle(X-texSize, texSize*2, texSize, texSize);
 		
-		
 		platforms.add(platform_basic);
-		platformsShapes.add(new Rectangle (texSize*8, texSize*2, texSize, texSize));
+		platformsShapes.add(new Rectangle (texSize*8, texSize*2, texSize, texSize)); //8
 		
 		platforms.add(platform_basic);
 		platformsShapes.add(new Rectangle (texSize*8, -5, texSize, texSize));

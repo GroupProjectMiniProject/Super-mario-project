@@ -69,6 +69,14 @@ public class Enemies extends GameState {
 		enemyList.add(new Enemies(Y-4*texSize, bottom-5*texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false, false, false, false, false)); //Change
 		System.out.printf("Enemy loaded \n");
 		
+		enemyList.add(new Enemies(500, texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false, false, false, false, false)); //Change
+		System.out.printf("Enemy loaded \n");
+		
+		enemyList.add(new Enemies(400, texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false, false, false, false, false)); //Change
+		System.out.printf("Enemy loaded \n");
+		
+		enemyList.add(new Enemies(300, texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false, false, false, false, false)); //Change
+		System.out.printf("Enemy loaded \n");
 		
 		
 	}

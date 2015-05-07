@@ -169,7 +169,7 @@ public class GameState extends BasicGameState {
 			killMario = false;
 			HP = 2;
 			marioShape = new Rectangle (Mario.x, Mario.y, mario.getWidth(), mario.getHeight());
-			coinCollection = 0; 
+			
 			new Enemies(0, 0, 0, 0, 0, 0, null, null, null, null, false, false, false, false, false).start();
 
 			
