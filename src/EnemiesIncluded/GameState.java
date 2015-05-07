@@ -50,7 +50,7 @@ public class GameState extends BasicGameState {
 	public static Coins Money = new Coins();
 	
 	//NEW CHANGE
-	public static boolean outterCollision = false, innerCollision = false;
+	public static boolean outerCollision = false, innerCollision = false;
 	
 	//Enemies 
 	public static ArrayList<Enemies> enemyList = new ArrayList<Enemies>();
@@ -58,7 +58,7 @@ public class GameState extends BasicGameState {
 	public static ArrayList<Rectangle> ePolices = new ArrayList<Rectangle>();
 	public static ArrayList<Rectangle> RedPolices = new ArrayList<Rectangle>();
 	public static ArrayList<Rectangle> enemyRecList = new ArrayList<Rectangle>();
-	//public static Image enemyDragonTex;
+	public static Image enemyDragonTex;
 	public static boolean enemyStartos = false;
 	public static boolean killMario = false;
 	//public static boolean killEnemy = false;
@@ -112,7 +112,7 @@ public class GameState extends BasicGameState {
 		MarioSheetLeft = new SpriteSheet (MarioSheetRight.getFlippedCopy(true, false), 32, 32);
 		MarioWalkLeft = new Animation (MarioSheetLeft, 200);
 		MarioWalkRight = new Animation (MarioSheetRight, 200);
-		enemySheetLeft = new SpriteSheet ("data/enemySprites.png");
+		enemySheetLeft = new SpriteSheet ("data/enemySprites.png", texSize, texSize);
 		enemySheetRight = new SpriteSheet (enemySheetLeft.getFlippedCopy(true, false), texSize, texSize);
 		enemyWalkLeft = new Animation (enemySheetLeft, 200);
 		enemyWalkRight = new Animation (enemySheetRight, 200);

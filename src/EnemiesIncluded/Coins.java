@@ -1,7 +1,6 @@
 package EnemiesIncluded;
 
 import org.newdawn.slick.Image;
-import org.newdawn.slick.geom.Rectangle;
 
 public class Coins extends GameState {
 	
@@ -13,5 +12,5 @@ public class Coins extends GameState {
 		System.out.println("COIN DRAWN");
 	}
 	
-
+	
 }
