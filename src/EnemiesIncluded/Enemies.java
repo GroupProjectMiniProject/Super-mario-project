@@ -7,11 +7,12 @@ import org.newdawn.slick.geom.Rectangle;
 
 public class Enemies extends GameState {
 	
+	
+	//Creating memory for rectangles that will define collision 
 	public  Rectangle BoundingBoxRed;
 	public  Rectangle BoundingBoxPurple;
-	public  Rectangle enemyInnerShape;//Change
-	public  Rectangle enemyOuterShape;//Change
-
+	public  Rectangle enemyInnerShape;
+	public  Rectangle enemyOuterShape;
 
 	public int x;
 	public int y;
@@ -26,7 +27,8 @@ public class Enemies extends GameState {
 	public boolean left;
 
 
-	
+	//Creating a method to give enemies different parameters. Parameters makes sure that each element of enemyList array 
+	//have their own pos, speed, boundingboxes etc.
 	public Enemies(int xpos, int ypos, float spX, float spY, int ovrX, int blwX, Rectangle eOtS, Rectangle bndboxR, Rectangle bndboxP, Rectangle eInS, boolean falls, boolean bo, boolean to, boolean righ, boolean lef) {
 		
 		x = xpos;
@@ -43,11 +45,9 @@ public class Enemies extends GameState {
 		top = to; 
 		right = righ;
 		left = lef; 
-		
-
 		falling = falls;
 	}
-
+	//for drawing the enemy IS THIS USED ANYMORE?
 	public void draw(Image image) {
 		
 		image.draw(x, y);
@@ -56,9 +56,10 @@ public class Enemies extends GameState {
 	
 	public  void start() {
 		
+		//Clearing arrayList for new stage 
 		enemyList.clear();
 		
-		
+		//Add new elements to enemyList.
 		enemyList.add(new Enemies(2*texSize, bottom-11*texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false, false, false, false, false)); //Change
 		System.out.printf("Enemy loaded \n");
 		
@@ -76,14 +77,19 @@ public class Enemies extends GameState {
 	public static void intersection() {
 		
 			for(Enemies dragonas: enemyList ){
-	
-			dragonas.enemyOuterShape = new Rectangle(dragonas.x, dragonas.y, enemyDragonTex.getWidth(), enemyDragonTex.getHeight()); //Change
+			
+			//Creating bounding boxes for collision detection
+				
+			//enemyOuterShape is normal shape of our Enemies
+			dragonas.enemyOuterShape = new Rectangle(dragonas.x, dragonas.y, enemyDragonTex.getWidth(), enemyDragonTex.getHeight());
+			//enenmyInnerShape is one pixel less than normal shape
 			dragonas.enemyInnerShape = new Rectangle  (dragonas.x+1, dragonas.y+1, enemyDragonTex.getWidth()-2, enemyDragonTex.getHeight()-2); //Change
-			//Lower body enemy boundingbox
+			
+			//Lower body enemy boundingbox setting
 			dragonas.BoundingBoxPurple = new Rectangle(dragonas.x+3, dragonas.y+12, enemyDragonTex.getWidth()-4, enemyDragonTex.getHeight()/2);
-			//Upper body enemy boundingbox
+			//Upper body enemy boundingbox setting
 			dragonas.BoundingBoxRed = new Rectangle(dragonas.x+3, dragonas.y-2, enemyDragonTex.getWidth()-4, enemyDragonTex.getHeight()-22);
-			//Change
+			
 			}	
 			
 			//Enemy-mario interaction.
@@ -94,22 +100,30 @@ public class Enemies extends GameState {
 				//if (marioShape.intersects(d))
 						//enemyList.remove(i); 
 				
+				//Setting array points accordding to marioShape edges
 				
+				//Top Left corner
 				arr2[0].setX(marioShape.getMinX()+1);
 				arr2[0].setY(marioShape.getMinY()+1);
+				//Top Right corner
 				arr2[1].setX(marioShape.getMaxX()-1);
 				arr2[1].setY(marioShape.getMinY()+1);
+				//Bot Left corner
 				arr2[2].setX(marioShape.getMinX()+1);
 				arr2[2].setY(marioShape.getMaxY()-1);
+				//Bot Right corner
 				arr2[3].setX(marioShape.getMaxX()-1);
 				arr2[3].setY(marioShape.getMaxY()-1);
 				
-				System.out.println(enemyList.indexOf(i));
-
-				//killing enemy, boundingbox red
+				
+				//When BoundingBoxRed (upper body of enemy) contains bottom right and left corner of mario
+				//then remove element i of enemyList which is the current one.
 				if (d.contains(arr2[2].getMinX(), arr2[2].getMinY())||d.contains(arr2[3].getMinX(), arr2[3].getMinY())){
-					enemyList.remove(i); 	
-				} if (marioShape.intersects(e)){
+					enemyList.remove(i); 
+				
+				//else if marioshape hits BoundingBoXRed (lower body of enemy) set powered up to false and remove 
+				//enemy hit. If mario was powered up then set deduct a Health point from mario and set killmario to false
+				} else if (marioShape.intersects(e)){
 					if (!poweredUp) {
 						HP--;
 						killMario = true; 
