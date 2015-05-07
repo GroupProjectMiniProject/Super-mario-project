@@ -106,7 +106,7 @@ public class Enemies extends GameState {
 				
 				
 				//killing enemy, boundingbox red
-				if (marioShape.intersects(d)){
+				if (d.contains(arr2[2].getMinX(), arr2[2].getMinY())||d.contains(arr2[3].getMinX(), arr2[3].getMinY())){
 					enemyList.remove(i); 	
 				} 
 			
