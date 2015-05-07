@@ -7,10 +7,10 @@ import org.newdawn.slick.geom.Rectangle;
 
 public class Enemies extends GameState {
 	
-	public Rectangle BoundingBoxRed;
-	public Rectangle BoundingBoxPurple;
-	public Rectangle enemyInnerShape;//Change
-	public Rectangle enemyOuterShape;//Change
+	public  Rectangle BoundingBoxRed;
+	public  Rectangle BoundingBoxPurple;
+	public  Rectangle enemyInnerShape;//Change
+	public  Rectangle enemyOuterShape;//Change
 
 
 	public int x;
@@ -54,7 +54,7 @@ public class Enemies extends GameState {
 	}
 	
 	
-	public void start() {
+	public  void start() {
 		
 		enemyList.clear();
 		
@@ -69,6 +69,7 @@ public class Enemies extends GameState {
 		System.out.printf("Enemy loaded \n");
 		
 		
+		
 	}
 	
 	
@@ -81,19 +82,18 @@ public class Enemies extends GameState {
 			//Lower body enemy boundingbox
 			dragonas.BoundingBoxPurple = new Rectangle(dragonas.x+3, dragonas.y+12, enemyDragonTex.getWidth()-4, enemyDragonTex.getHeight()/2);
 			//Upper body enemy boundingbox
-			dragonas.BoundingBoxRed = new Rectangle(dragonas.x+3, dragonas.y, enemyDragonTex.getWidth()-7, enemyDragonTex.getHeight()/3);
+			dragonas.BoundingBoxRed = new Rectangle(dragonas.x+3, dragonas.y-2, enemyDragonTex.getWidth()-4, enemyDragonTex.getHeight()-22);
 			//Change
 			}	
 			
 			//Enemy-mario interaction.
 			
-				for (int i = enemyList.size()-1; i>= 0; i--){
+			for (int i = enemyList.size()-1; i>= 0; i--){
 				Rectangle e = enemyList.get(i).BoundingBoxPurple;
 				Rectangle d = enemyList.get(i).BoundingBoxRed;
-
 				//if (marioShape.intersects(d))
 						//enemyList.remove(i); 
-			
+				
 				
 				arr2[0].setX(marioShape.getMinX()+1);
 				arr2[0].setY(marioShape.getMinY()+1);
@@ -104,20 +104,17 @@ public class Enemies extends GameState {
 				arr2[3].setX(marioShape.getMaxX()-1);
 				arr2[3].setY(marioShape.getMaxY()-1);
 				
-				
+				System.out.println(enemyList.indexOf(i));
+
 				//killing enemy, boundingbox red
 				if (d.contains(arr2[2].getMinX(), arr2[2].getMinY())||d.contains(arr2[3].getMinX(), arr2[3].getMinY())){
 					enemyList.remove(i); 	
-				} 
-			
-				//killing mario, boundingbox purple
-				if (marioShape.intersects(e)){
+				} if (marioShape.intersects(e)){
 					if (!poweredUp) {
 						HP--;
 						killMario = true; 
 					}
 					poweredUp = false;
-					
 					enemyList.remove(i); 
 				}
 

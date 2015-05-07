@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 
 
+
+
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -131,7 +133,6 @@ public class GameState extends BasicGameState {
 		//System.out.println("Enemy loaded");
 
 		//Loading Enemies - ??
-		new Enemies(0, 0, 0, 0, 0, 0, null, null, null, null, false, false, false, false, false).start();
 		System.out.println("Enemies Loaded");
 		
 		//Loading PowerUPs
@@ -168,7 +169,10 @@ public class GameState extends BasicGameState {
 			killMario = false;
 			HP = 2;
 			marioShape = new Rectangle (Mario.x, Mario.y, mario.getWidth(), mario.getHeight());
+			
 			new Enemies(0, 0, 0, 0, 0, 0, null, null, null, null, false, false, false, false, false).start();
+
+			
 			LoadingCoins.start();
 			PowerUp.start();
 			start = false;		
@@ -250,9 +254,12 @@ public class GameState extends BasicGameState {
 		{			
 			drago.x += (int)drago.speedX;
 			drago.y += (int)drago.speedY;
+			
 		}
 				
-		
+		System.out.println(enemyList.size());
+
+
 		//Mario and Enemy collisions with platforms
 		Intersection.start();
 		
