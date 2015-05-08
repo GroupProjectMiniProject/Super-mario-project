@@ -146,9 +146,9 @@ public class Intersection extends GameState {
 		
 	//****************************************************************************// Change
 		//Enemy Intersections with platform
-		
-	outerCollision = false; 
-	innerCollision = false;
+		for (Enemies d: enemyList){
+	d.outerCollision = false; 
+	d.innerCollision = false;}
 	
 		for (Rectangle rec : platformsShapes){
 			
@@ -165,16 +165,16 @@ public class Intersection extends GameState {
 
 				
 				if (o.intersects(rec))
-					outerCollision = true;
+					dragons.outerCollision = true;
 				if (i.intersects(rec)){
 					
-					innerCollision = true;
+					dragons.innerCollision = true;
 					b = t = l = r = false; 
 					x = y = 0; 
 				
 				//Bot Right Corner
 				if (rec.contains(i.getMaxX(), i.getMaxY())){
-					if (rec.contains(i.getMaxX(), i.getMinX()))
+					if (rec.contains(i.getMaxX(), i.getMinY()))
 						r = true;
 					else if (rec.contains(i.getMinX(), i.getMaxY()))
 						b = true; 
@@ -192,16 +192,21 @@ public class Intersection extends GameState {
 				
 				//Bot Left Corner
 				} else if (rec.contains(i.getMinX(), i.getMaxY())){
-					if (rec.contains(i.getMinX(), i.getMinY()))
+					if (rec.contains(i.getMinX(), i.getMinY())){
 						l = true;
+					}
+					
 					else {
 						x = Math.abs(i.getMinX()-rec.getMaxX());
 						y = Math.abs( i.getMaxY()-rec.getMinY());
+
 						if (x>y) {
 							b = true;
+
 						}
 						else if (x<y) l = true;
 						else {
+
 							b = true;
 							l = true;
 						}
@@ -213,9 +218,10 @@ public class Intersection extends GameState {
 					else {
 						x = Math.abs(i.getMaxX()-rec.getMinX());
 						y = Math.abs(i.getMinY()-rec.getMaxY());
-						if (x>y || y==19) t = true; 
+						if (x>y || y==0) t = true; 
 						else if (x<y) r = true;
 						else {
+
 							t = true;
 							r = true;
 						}
@@ -224,9 +230,12 @@ public class Intersection extends GameState {
 				} else if (rec.contains(i.getMinX(), i.getMinY())){
 					x = Math.abs(i.getMinX()-rec.getMaxX());
 					y = Math.abs(i.getMinY()-rec.getMaxY());
-					if (x>y || y==19) t = true; 
-					else if (x<y) l = true;
+					if (x>y || y==0) {
+						t = true; 
+					}
+					else if (x<y) l = true; 
 					else {
+
 						t = true;
 						l = true;
 					}
@@ -235,17 +244,21 @@ public class Intersection extends GameState {
 				if (t){
 					e.y = (int)(rec.getMaxY());
 					e.falling = true;
-					e.speedY = 0;
+					e.speedY = 1.0f;
+
 				}
 				if (b){
 					e.y = (int)(rec.getMinY()-o.getHeight());
 					e.speedY = 0;
 					e.falling = false;
+
 				}
 				
 				if (r){
 					e.x = (int)(rec.getMinX()-o.getWidth());
 					e.speedX = -1.0f;
+					
+
 				}
 				if (l){
 					e.x = (int)rec.getMaxX();
@@ -255,7 +268,7 @@ public class Intersection extends GameState {
 			
 		}
 		for(Enemies e : enemyList){
-		if (!outerCollision && !innerCollision){
+		if (!e.outerCollision && !e.innerCollision){
 			e.falling = true;
 		}
 		}

@@ -51,8 +51,6 @@ public class GameState extends BasicGameState {
 	public static Character Mario = new Character();
 	public static Coins Money = new Coins();
 	
-	//NEW CHANGE
-	public static boolean outerCollision = false, innerCollision = false;
 	
 	//Enemies 
 	public static ArrayList<Enemies> enemyList = new ArrayList<Enemies>();
@@ -107,9 +105,8 @@ public class GameState extends BasicGameState {
 		background = new Image ("data/Background_Basic.bmp");
 		platform_basic = new Image ("data/Platform_Basic.bmp");
 		money = new Image("data/mariobroscoin.png");
-		enemyDragonTex = new Image ("data/drage3.png");
+		enemyDragonTex = new Image ("data/drage4.png");
 		powerUpTex = new Image("data/mush.png");
-		//marioPowUp = new Image ( "data/marioBig.png");
 		MarioSheetRight = new SpriteSheet ("data/MarioSheet.png", 32, 32);
 		MarioSheetLeft = new SpriteSheet (MarioSheetRight.getFlippedCopy(true, false), 32, 32);
 		MarioWalkLeft = new Animation (MarioSheetLeft, 200);
@@ -170,7 +167,7 @@ public class GameState extends BasicGameState {
 			HP = 2;
 			marioShape = new Rectangle (Mario.x, Mario.y, mario.getWidth(), mario.getHeight());
 			
-			new Enemies(0, 0, 0, 0, 0, 0, null, null, null, null, false, false, false, false, false).start();
+			new Enemies(0, 0, 0, 0, 0, 0, null, null, null, null, false, false, false, false, false, false, false).start();
 
 			
 			LoadingCoins.start();
@@ -225,7 +222,7 @@ public class GameState extends BasicGameState {
 		{
 			for (Enemies dra: enemyList)
 			{
-				dra.speedX = 1.0f;
+				dra.speedX = -1.0f;
 				
 				//dra.speedY = 1.0f;
 

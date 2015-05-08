@@ -25,11 +25,12 @@ public class Enemies extends GameState {
 	public boolean top;
 	public boolean right;
 	public boolean left;
+	public boolean outerCollision, innerCollision; 
 
 
 	//Creating a method to give enemies different parameters. Parameters makes sure that each element of enemyList array 
 	//have their own pos, speed, boundingboxes etc.
-	public Enemies(int xpos, int ypos, float spX, float spY, int ovrX, int blwX, Rectangle eOtS, Rectangle bndboxR, Rectangle bndboxP, Rectangle eInS, boolean falls, boolean bo, boolean to, boolean righ, boolean lef) {
+	public Enemies(int xpos, int ypos, float spX, float spY, int ovrX, int blwX, Rectangle eOtS, Rectangle bndboxR, Rectangle bndboxP, Rectangle eInS, boolean falls, boolean bo, boolean to, boolean righ, boolean lef, boolean outCol, boolean inCol) {
 		
 		x = xpos;
 		y = ypos;
@@ -46,6 +47,9 @@ public class Enemies extends GameState {
 		right = righ;
 		left = lef; 
 		falling = falls;
+		outerCollision = outCol;
+		innerCollision = inCol; 
+
 	}
 	//for drawing the enemy IS THIS USED ANYMORE?
 	public void draw(Image image) {
@@ -60,23 +64,23 @@ public class Enemies extends GameState {
 		enemyList.clear();
 		
 		//Add new elements to enemyList.
-		enemyList.add(new Enemies(2*texSize, bottom-11*texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false, false, false, false, false)); //Change
+		enemyList.add(new Enemies(2*texSize, bottom-11*texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false, false, false, false, false, false, false)); //Change
 		System.out.printf("Enemy loaded \n");
 		
-		enemyList.add(new Enemies(texSize, bottom-texSize-10, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false, false, false, false, false)); //Change
+		enemyList.add(new Enemies(texSize, bottom-texSize-10, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false, false, false, false, false, false, false)); //Change
 		System.out.printf("Enemy loaded \n");
 		
-		enemyList.add(new Enemies(Y-4*texSize, bottom-5*texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false, false, false, false, false)); //Change
+		enemyList.add(new Enemies(Y-4*texSize, bottom-5*texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false, false, false, false, false, false, false)); //Change
 		System.out.printf("Enemy loaded \n");
 		
-		enemyList.add(new Enemies(500, texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false, false, false, false, false)); //Change
+		enemyList.add(new Enemies(500, texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false, false, false, false, false, false, false)); //Change
 		System.out.printf("Enemy loaded \n");
-		
+	/*	
 		enemyList.add(new Enemies(400, texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false, false, false, false, false)); //Change
 		System.out.printf("Enemy loaded \n");
 		
 		enemyList.add(new Enemies(300, texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false, false, false, false, false)); //Change
-		System.out.printf("Enemy loaded \n");
+		System.out.printf("Enemy loaded \n");*/
 		
 		
 	}
