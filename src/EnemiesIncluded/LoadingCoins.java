@@ -40,25 +40,6 @@ public class LoadingCoins extends GameState {
 		coinsShapes.add(new Rectangle(700, 160, texSize, texSize));
 		
 		coinsShapes.add(new Rectangle(texSize*3, 240, texSize, texSize));
-		
-		
-		
-		
-		/*coin.add(money);
-		coinsShapes.add(new Rectangle (X-texSize, bottom-2*texSize, texSize, texSize));
-		
-		coin.add(money);
-		coinsShapes.add(new Rectangle (X-texSize*5, bottom-3*texSize, texSize, texSize));
-		
-		coin.add(money);
-		coinsShapes.add(new Rectangle (0, bottom-3*texSize, texSize, texSize));*/
-		
-		int coinCount = 0;
-		for (Rectangle rec : coinsShapes){
-			coinCount++;
-			System.out.println("Rectangle " + coinCount + " [" + rec.getX() + ", " + rec.getY() + "]" + " [" + coinsShapes.indexOf(rec) + "]");
-			
-		}
 	}
 
 }
