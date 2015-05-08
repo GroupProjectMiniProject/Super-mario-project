@@ -73,14 +73,14 @@ public class GameState extends BasicGameState {
 	//Mario
 	public static int HP = 2; 
 	public static Point[] arr2 = new Point[4];
-	public static int X = 800, Y = 600, jumpSpeed = 20, fallSpeed = 10 , texSize = 32, bottom = Y-texSize; 
+	public static int timer1 = 0, X = 800, Y = 600, jumpSpeed = 20, fallSpeed = 10 , texSize = 32, bottom = Y-texSize; 
 	public static float x = 0, y = 0;
 	public static float gravity = 1.3f, acc = 1.4f;
 	public static Rectangle marioShape;
 	public static Image mario;
 	public static Image flag;
 	public static Rectangle flagShape;
-	public static Boolean finish = false;
+	public static Boolean finish = false, timer = false, hitFlag = false;
 	public static Image background;
 	public static Image platform_basic;
 	public static SpriteSheet MarioSheetLeft, MarioSheetRight;
@@ -139,6 +139,7 @@ public class GameState extends BasicGameState {
 			enemyStartos = true;
 			poweredUp = false; 
 			killMario = false;
+			hitFlag = false;
 			coinCollection = 0;
 			HP = 2;
 			marioShape = new Rectangle (Mario.x, Mario.y, mario.getWidth(), mario.getHeight());
@@ -238,7 +239,22 @@ public class GameState extends BasicGameState {
 		if (finish) {
 			finish = false;
 			start = true;
+			timer = false;
+			killMario = false;
+			Mario.load();
 			sbg.enterState(2, new FadeOutTransition(), new FadeInTransition());
+		}
+		
+		if (timer){
+			if (timer1 <= 60){
+				timer1++;
+				if (timer1 % 3 == 0) killMario = !killMario;
+			}
+			else {
+				timer1 = 0;
+				killMario = false;
+				timer = false;
+			}
 		}
 		
 	}
@@ -281,6 +297,11 @@ public class GameState extends BasicGameState {
 			else if (keyLeft) MarioWalkLeft.draw(Mario.x, Mario.y, Color.green);
 			else if (keyRight) MarioWalkRight.draw(Mario.x, Mario.y, Color.green);
 		}	
+		else if (killMario){
+			//System.out.println("Dead");
+			mario.draw(Mario.x, Mario.y, 1.0f, Color.red);
+			timer = true;
+		}	
 		else {
 			if (!keyRight && !keyLeft) mario.draw(Mario.x, Mario.y);
 			else if (keyLeft) MarioWalkLeft.draw(Mario.x, Mario.y);
@@ -291,11 +312,11 @@ public class GameState extends BasicGameState {
 		g.setColor(Color.black);
 		g.drawString("Coins: " + coinCollection, 15, 60);
 		g.drawString("Enemy HP: " + HP, 15, 30);
-		g.drawString("Powered UP?: " + poweredUp, 15, 90);
-		g.drawString("killMario?: " + killMario, 15, 120);
+		//g.drawString("Powered UP?: " + poweredUp, 15, 90);
+		//g.drawString("killMario?: " + killMario, 15, 120);
 	    
 		//Color for game over stage
-		g.setColor(Color.red);
+		//g.setColor(Color.red);
 		
 		/*
 		Interaction notifiers for our own use.
@@ -307,13 +328,7 @@ public class GameState extends BasicGameState {
 		for (Rectangle r : Cpolices){
 			g.draw(r);
 		} */
-			
-
-		//Draw Mario
-		if (killMario){
-			System.out.println("Dead");
-			mario.draw(Mario.x, Mario.y, 1.0f, Color.red);
-		}	
+		
 	}
 	
 	//returns the ID of the state of gameplay

@@ -26,7 +26,7 @@ public class MenuState extends BasicGameState {
 		
 		//Intro/Outro text
 		g.drawString("Stage 0", 50, 30);
-		g.drawString("Press ENTER to start", 50, 50);
+		g.drawString("Press ENTER to start", 330, 290);
 	}
 
 	public int getID() {

@@ -142,7 +142,10 @@ public class Intersection extends GameState {
 			
 			fall = true;
 		}	
-	if (flagShape.contains(marioShape.getCenterX(), marioShape.getCenterY())) finish = true; 
+	if (flagShape.contains(marioShape.getCenterX(), marioShape.getCenterY())) {
+		finish = true; 
+		hitFlag = true;
+	}
 		
 	//****************************************************************************// Change
 		//Enemy Intersections with platform

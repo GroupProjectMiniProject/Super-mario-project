@@ -1,5 +1,6 @@
 package EnemiesIncluded;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -24,8 +25,19 @@ public class GameOverState extends BasicGameState {
 	public void render(GameContainer container, StateBasedGame sbg, Graphics g)
 			throws SlickException {
 		//Text for game over stage
-		g.drawString("Stage 2", 50, 30);
-		g.drawString("Game Over!", 50, 50);
+		if (GameState.hitFlag){
+			g.setColor(Color.yellow);
+			//g.drawString("Stage 2", 50, 30);
+			g.drawString("You Win!", 375, 290);
+			g.setColor(Color.white);
+		} 
+		else {
+			//g.drawString("Stage 2", 50, 30);
+			g.setColor(Color.red);
+			g.drawString("Game Over!", 375, 290);
+			g.setColor(Color.white);
+		}
+		
 	}
 
 	public int getID() {
