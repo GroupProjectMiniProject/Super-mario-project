@@ -24,7 +24,7 @@ public class MenuState extends BasicGameState {
 	public void render(GameContainer container, StateBasedGame sbg, Graphics g)
 			throws SlickException {
 		
-		//Intro/Outro text
+		//Intro text
 		g.drawString("Stage 0", 50, 30);
 		g.drawString("Press ENTER to start", 330, 290);
 	}

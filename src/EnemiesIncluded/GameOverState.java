@@ -24,7 +24,7 @@ public class GameOverState extends BasicGameState {
 	
 	public void render(GameContainer container, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-		//Text for game over stage
+		//Text for ending stage
 		if (GameState.hitFlag){
 			g.setColor(Color.yellow);
 			//g.drawString("Stage 2", 50, 30);
