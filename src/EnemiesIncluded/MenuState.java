@@ -18,7 +18,10 @@ public class MenuState extends BasicGameState {
 	
 	public void update(GameContainer container, StateBasedGame sbg, int delta)
 			throws SlickException {
+		
+		//Enter pressed
 		if (container.getInput().isKeyPressed(Input.KEY_ENTER)) sbg.enterState(1, new FadeOutTransition(), new FadeInTransition());
+		
 	}
 	
 	public void render(GameContainer container, StateBasedGame sbg, Graphics g)
