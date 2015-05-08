@@ -300,7 +300,9 @@ public class GameState extends BasicGameState {
 		}	
 		else if (killMario){
 			//System.out.println("Dead");
-			mario.draw(Mario.x, Mario.y, 1.0f, Color.red);
+			if (!keyRight && !keyLeft) mario.draw(Mario.x, Mario.y, Color.red);
+			else if (keyLeft) MarioWalkLeft.draw(Mario.x, Mario.y, Color.red);
+			else if (keyRight) MarioWalkRight.draw(Mario.x, Mario.y, Color.red);
 			timer = true;
 		}	
 		else {

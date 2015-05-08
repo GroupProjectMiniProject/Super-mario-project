@@ -14,8 +14,9 @@ public class SetupClass extends StateBasedGame {
 	}
 	
 	public static void main(String[] args) throws SlickException {
-		AppGameContainer app = new AppGameContainer(new SetupClass("Setup Test"));
 		
+		//Settings for application
+		AppGameContainer app = new AppGameContainer(new SetupClass("Setup Test"));
 		app.setDisplayMode(X, Y, false);
 		app.setAlwaysRender(true);
 		app.setTargetFrameRate(60);
@@ -25,6 +26,8 @@ public class SetupClass extends StateBasedGame {
 	}
 
 	public void initStatesList(GameContainer container) throws SlickException {
+		
+		//Adding of states into Slick2D pre-designed interface
 		this.addState(new MenuState());
 		this.addState(new GameState());
 		this.addState(new GameOverState());

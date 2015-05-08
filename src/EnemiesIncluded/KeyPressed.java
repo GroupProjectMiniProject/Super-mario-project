@@ -68,12 +68,6 @@ public class KeyPressed extends GameState {
 		if (input.isKeyDown(Input.KEY_DOWN)){
 			//crouch
 		}
-		
-		//Hp Back
-		if (input.isKeyDown(Input.KEY_A)){
-			killMario = false;
-		}
-		
 	
 	}
 
