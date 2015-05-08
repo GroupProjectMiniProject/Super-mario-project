@@ -97,11 +97,6 @@ public class LoadingPlatforms extends GameState {
 		platforms.add(platform_basic);
 		platformsShapes.add(new Rectangle (texSize*5, texSize*4, texSize, texSize));
 		
-		int count = 0;
-		for (Rectangle rec : platformsShapes){
-			count++;
-			System.out.println("Rectangle " + count + " [" + rec.getX() + ", " + rec.getY() + "]" + " [" + platformsShapes.indexOf(rec) + "]");
-		}
 	}
 
 }
