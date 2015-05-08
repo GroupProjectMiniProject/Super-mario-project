@@ -245,6 +245,7 @@ public class GameState extends BasicGameState {
 			sbg.enterState(2, new FadeOutTransition(), new FadeInTransition());
 		}
 		
+		//Timer for getting-hurt-animation
 		if (timer){
 			if (timer1 <= 60){
 				timer1++;
