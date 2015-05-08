@@ -8,6 +8,7 @@ public class PowerUp extends GameState {
 	public int x;
 	public int y;
 
+	//Drawing function
 	public void draw(Image image) {
 		image.draw(x, y);
 	}
