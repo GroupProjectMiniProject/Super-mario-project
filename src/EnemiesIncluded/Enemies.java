@@ -1,7 +1,7 @@
 package EnemiesIncluded;
 
 
-import org.newdawn.slick.Image;
+//import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Rectangle;
 
 
@@ -51,12 +51,6 @@ public class Enemies extends GameState {
 		innerCollision = inCol; 
 
 	}
-	//for drawing the enemy IS THIS USED ANYMORE?
-	public void draw(Image image) {
-		
-		image.draw(x, y);
-	}
-	
 	
 	public  void start() {
 		
@@ -75,15 +69,8 @@ public class Enemies extends GameState {
 		
 		enemyList.add(new Enemies(500, texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false, false, false, false, false, false, false)); //Change
 		System.out.printf("Enemy loaded \n");
-	/*	
-		enemyList.add(new Enemies(400, texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false, false, false, false, false)); //Change
-		System.out.printf("Enemy loaded \n");
-		
-		enemyList.add(new Enemies(300, texSize, 0.0f, 0.0f, 50, 50, enemyOuterShape, BoundingBoxRed, BoundingBoxPurple, enemyInnerShape, false, false, false, false, false)); //Change
-		System.out.printf("Enemy loaded \n");*/
-		
-		
 	}
+	
 	
 	
 	public static void intersection() {
@@ -109,10 +96,8 @@ public class Enemies extends GameState {
 			for (int i = enemyList.size()-1; i>= 0; i--){
 				Rectangle e = enemyList.get(i).BoundingBoxPurple;
 				Rectangle d = enemyList.get(i).BoundingBoxRed;
-				//if (marioShape.intersects(d))
-						//enemyList.remove(i); 
 				
-				//Setting array points accordding to marioShape edges
+				//Setting array points according to marioShape edges
 				
 				//Top Left corner
 				arr2[0].setX(marioShape.getMinX()+1);
@@ -143,12 +128,6 @@ public class Enemies extends GameState {
 					poweredUp = false;
 					enemyList.remove(i); 
 				}
-
-
-				
-				
-				
-			
 	}	
 
 	}

@@ -40,45 +40,36 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public class GameState extends BasicGameState {
 	
-	//Coins
-	//public static ArrayList<Image> coin = new ArrayList<Image>();
 	public static ArrayList<Rectangle> coinsShapes = new ArrayList<Rectangle>(), Cpolices = new ArrayList<Rectangle>();
-	//public static Point[] arr3 = new Point[4];
 	public static int coinCollection = 0; 
 	public static Image money;
 	public static boolean collision = false, fall = false, start = true, jump = false, allowed = true, left = false, right = false, top = false, bot = false, enemyheadQ = false;
 	public static boolean leftE = false, rightE = false, botE = false, topE = false;
 	public static Character Mario = new Character();
-	public static Coins Money = new Coins();
 	
 	
 	//Enemies 
 	public static ArrayList<Enemies> enemyList = new ArrayList<Enemies>();
-	//public static ArrayList<Image> enemyTexList = new ArrayList<Image>();
 	public static ArrayList<Rectangle> ePolices = new ArrayList<Rectangle>();
 	public static ArrayList<Rectangle> RedPolices = new ArrayList<Rectangle>();
 	public static ArrayList<Rectangle> enemyRecList = new ArrayList<Rectangle>();
 	public static Image enemyDragonTex;
 	public static boolean enemyStartos = false;
 	public static boolean killMario = false;
-	//public static boolean killEnemy = false;
 	public static boolean eCollision = false;
 	public static boolean keyLeft = false, keyRight = false, eFall = false;
 	public static SpriteSheet enemySheetLeft, enemySheetRight;
 	public static Animation enemyWalkLeft, enemyWalkRight;
-	//public static Point[] enemyArray = new Point[4];
 
 	//Platforms
 	public static ArrayList<Image> platforms = new ArrayList<Image>();
 	public static ArrayList<Rectangle> platformsShapes = new ArrayList<Rectangle>(), polices = new ArrayList<Rectangle>();
 
 	//PowerUps
-	//public static ArrayList<Image> powerUpTexList = new ArrayList<Image>();
 	public static Image powerUpTex;
 	public static ArrayList<Rectangle> powerUpList = new ArrayList<Rectangle>();
 	public static boolean poweredUp = false; 
 
-	
 	//Mario
 	public static int HP = 2; 
 	public static Point[] arr2 = new Point[4];
@@ -94,7 +85,6 @@ public class GameState extends BasicGameState {
 	public static Image platform_basic;
 	public static SpriteSheet MarioSheetLeft, MarioSheetRight;
 	public static Animation MarioWalkLeft, MarioWalkRight;
-	//public static Image marioPowUp;
 	
 
 		
@@ -115,7 +105,6 @@ public class GameState extends BasicGameState {
 		enemySheetRight = new SpriteSheet (enemySheetLeft.getFlippedCopy(true, false), texSize, texSize);
 		enemyWalkLeft = new Animation (enemySheetLeft, 200);
 		enemyWalkRight = new Animation (enemySheetRight, 200);
-		
 		flag = new Image ("data/flag.png");
 		
 		System.out.println("Textures Loaded!");
@@ -127,10 +116,6 @@ public class GameState extends BasicGameState {
 		//Loading platforms into scene
 		LoadingPlatforms.start();
 		System.out.println("Platforms Loaded!");
-		//System.out.println("Enemy loaded");
-
-		//Loading Enemies - ??
-		System.out.println("Enemies Loaded");
 		
 		//Loading PowerUPs
 		PowerUp.start();
@@ -140,16 +125,6 @@ public class GameState extends BasicGameState {
 		for(int i = 0; i < arr2.length; i++) {
 		    arr2[i] = new Point(0, 0);
 		}
-			//Enemy
-		/*for(int i = 0; i < enemyArray.length; i++) {
-		    enemyArray[i] = new Point(0, 0);
-		}
-			//Coins
-		for(int i = 0; i < arr2.length; i++) {
-		    arr3[i] = new Point(0, 0);
-		}*/
-		
-			
 	}
 	
 	public void update(GameContainer container, StateBasedGame sbg, int delta)
@@ -223,16 +198,12 @@ public class GameState extends BasicGameState {
 			for (Enemies dra: enemyList)
 			{
 				dra.speedX = -1.0f;
-				
-				//dra.speedY = 1.0f;
 
 				enemyStartos = false;
 
 			}
 		}
 	
-		
-		
 		//Enemy borders
 		for (Enemies drago: enemyList)
 		{			
@@ -256,7 +227,6 @@ public class GameState extends BasicGameState {
 				
 		System.out.println(enemyList.size());
 
-
 		//Mario and Enemy collisions with platforms
 		Intersection.start();
 		
@@ -270,22 +240,16 @@ public class GameState extends BasicGameState {
 			sbg.enterState(2, new FadeOutTransition(), new FadeInTransition());
 		}
 		
-        //Coins Loading
-		//IntersectionCoin.start();
 	}
 
 	public void render(GameContainer container, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-		
-		//Draw stage notifier
-		g.drawString("Stage 1", 50, 30);
 		
 		//Draw background image
 		background.draw(0, 0);
 
 		//Draw coins
 		for (Rectangle rec : coinsShapes) {
-			//coin.get(coinsShapes.indexOf(rec)).draw(rec.getX(),rec.getY());
 			money.draw(rec.getX(), rec.getY());
 		}
 		
@@ -300,14 +264,12 @@ public class GameState extends BasicGameState {
 		//Draw Enemies  
 		for(Enemies dragon: enemyList ) // selecting list items with for loop method 1
 		{
-			//enemyTexList.get(enemyList.indexOf(dragon)).draw(dragon.x, dragon.y);
 			if (dragon.speedX < 0) enemyWalkLeft.draw(dragon.x, dragon.y);
 			else enemyWalkRight.draw(dragon.x, dragon.y);
 		}
 		
 		//Draw PowerUps
 		for (Rectangle rec : powerUpList) {
-			//powerUpTexList.get(powerUpList.indexOf(rec)).draw(rec.getX(),rec.getY());
 			powerUpTex.draw(rec.getX(), rec.getY());
 		}
 		
@@ -330,38 +292,34 @@ public class GameState extends BasicGameState {
 		g.drawString("Enemy HP: " + HP, 15, 30);
 		g.drawString("Powered UP?: " + poweredUp, 15, 90);
 		g.drawString("killMario?: " + killMario, 15, 120);
-
-		//Interaction notifiers
+	    
+		//Color for game over stage
 		g.setColor(Color.red);
+		
+		/*
+		Interaction notifiers for our own use.
+		g.drawString("Stage 1", 50, 30);
+		
 		for (Rectangle r : polices){
 			g.draw(r);
 		}
-		
 		for (Rectangle r : Cpolices){
 			g.draw(r);
-		}
+		} */
 			
-		 //Mario.draw(mario);
 
 		//Draw Mario
 		if (killMario){
 			System.out.println("Dead");
 			mario.draw(Mario.x, Mario.y, 1.0f, Color.red);
 		}	
-		//coins
-		//Money.draw(money);
 	}
 	
-	
-	
-	
-
+	//returns the ID of the state of gameplay
 	@Override
 	public int getID() {
 		// TODO Auto-generated method stub
 		return 1;
 	}
-	
-
 	
 }

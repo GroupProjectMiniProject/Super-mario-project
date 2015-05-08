@@ -13,7 +13,6 @@ public class GameOverState extends BasicGameState {
 
 	public void init(GameContainer container, StateBasedGame sbg)
 			throws SlickException {
-		
 	}
 	
 	public void update(GameContainer container, StateBasedGame sbg, int delta)
@@ -24,6 +23,7 @@ public class GameOverState extends BasicGameState {
 	
 	public void render(GameContainer container, StateBasedGame sbg, Graphics g)
 			throws SlickException {
+		//Text for game over stage
 		g.drawString("Stage 2", 50, 30);
 		g.drawString("Game Over!", 50, 50);
 	}
